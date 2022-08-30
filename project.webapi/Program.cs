@@ -12,6 +12,17 @@ namespace project.webapi
 
             // Add services to the container.
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    policy =>
+                    {
+                        policy.WithOrigins(
+                            "https://localhost:44423")
+                        .AllowAnyHeader().AllowAnyMethod();
+                    });
+            });
+
             builder.Services.AddControllers();
 
             builder.Services.AddEndpointsApiExplorer();
@@ -35,6 +46,7 @@ namespace project.webapi
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -44,8 +56,9 @@ namespace project.webapi
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseCors(); // MODIFICA PER IL CORS
 
+            app.UseAuthorization();
 
             app.MapControllers();
 

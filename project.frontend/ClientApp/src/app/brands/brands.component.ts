@@ -25,15 +25,7 @@ export class BrandsComponent implements OnInit {
     this.brandService.GetBrands()
       .subscribe(
         (response) => {                           //next() callback
-          console.log(this.brands)
-          if (this.brands) {
-            this.brands.push(response);
-          }
-          else {
-            let arr = [];
-            arr.push(response);
-            this.brands = arr;
-          }
+          this.brands = response;
         },
         (error) => {                              //error() callback
           console.error('Request failed with error')
@@ -41,7 +33,7 @@ export class BrandsComponent implements OnInit {
           this.loading = false;
         },
         () => {                                   //complete() callback
-          console.error('Request completed')      //This is actually not needed 
+          console.info('Request completed')      //This is actually not needed 
           this.loading = false;
         })
   }

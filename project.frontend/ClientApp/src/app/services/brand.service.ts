@@ -1,24 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Brand } from '../dto/brand.model';
+import { ISettings } from '../dto/isettings.interface';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class BrandService {
 
-  baseURL: string = "https://localhost:7124/api/Brand";
-
-  constructor(private http: HttpClient) {
+  private cfg : ConfigService | undefined;
+  private url: string |undefined;
+  constructor(private http: HttpClient, private conf: ConfigService) {
+    this.cfg = conf;
+    this.url = this.cfg.GetValue("urlApi");
   }
 
-  GetBrands(): Observable<Brand> {
-    return this.http.get<Brand>(this.baseURL)
+  GetBrands(): Observable<Brand[]> {
+    return this.http.get<Brand[]>(`${this.url}`);
   }
 
   GetBrandsById(id: number): Observable<Brand> {
-    return this.http.get<Brand>(`${this.baseURL}/${id}`)
+    return this.http.get<Brand>(`${this.url}/${id}`)
   }
 }

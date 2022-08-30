@@ -1,6 +1,6 @@
 export interface Brand {
-  BrandId: number;
-  BrandName: string;
-  TotalOrderValue: number;
-  TotalOrderQnt: number
+  brandId: number;
+  brandName: string;
+  totalOrderValue: number;
+  totalOrderQnt: number
 }

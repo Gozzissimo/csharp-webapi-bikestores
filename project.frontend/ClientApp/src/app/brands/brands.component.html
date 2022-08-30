@@ -1,9 +1,4 @@
-<h1 class="heading"><strong>HTTP </strong>Demo</h1>
-
-<!--<div class="form-group">
-  <label for="ipAddress">Ip Address</label>
-  <input type="text" class="form-control" name="ipAddress" [(ngModel)]="ipAddress">
-</div>-->
+<h1 class="heading"><strong>HTTP </strong>Brand</h1>
 
 <div class="form-group">
   <button type="button" (click)="GetBrands()">Get Brands</button>
@@ -25,10 +20,8 @@
   </thead>
   <tbody>
     <tr *ngFor="let brand of brands;">
-      <td>{{brand.BrandId}}</td>
-      <td>{{brand.BrandName}}</td>
+      <td>{{brand.brandId}}</td>
+      <td>{{brand.brandName}}</td>
     </tr>
   </tbody>
 </table>
-
-<pre>{{brands | json}}</pre>
