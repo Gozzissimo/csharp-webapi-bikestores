@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Brand } from '../dto/brand.model';
-import { ISettings } from '../dto/isettings.interface';
+import { ISetting } from '../dto/isetting.interface';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
@@ -20,10 +20,10 @@ export class BrandService {
   }
 
   GetBrands(): Observable<Brand[]> {
-    return this.http.get<Brand[]>(`${this.url}`);
+    return this.http.get<Brand[]>(`${this.url}/brand`);
   }
 
   GetBrandsById(id: number): Observable<Brand> {
-    return this.http.get<Brand>(`${this.url}/${id}`)
+    return this.http.get<Brand>(`${this.url}/brand/${id}`)
   }
 }

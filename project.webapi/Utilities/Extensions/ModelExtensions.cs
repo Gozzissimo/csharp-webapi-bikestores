@@ -432,5 +432,47 @@ namespace project.webapi.Utilities.Extensions
             return List;
         }
         #endregion
+
+        #region Setting
+        public static SettingDTO ToModelDTO(this Setting Setting)
+        {
+            return new SettingDTO
+            {
+                Id = Setting.Id,
+                SettingKey = Setting.SettingKey,
+                SettingValue = Setting.SettingValue
+            };
+        }
+        public static List<SettingDTO> ToModelDTO(this List<Setting>? Setting)
+        {
+            List<SettingDTO> List = new List<SettingDTO>();
+
+            foreach (Setting setting in Setting)
+            {
+                List.Add(setting.ToModelDTO());
+            }
+            return List;
+        }
+
+        public static Setting ToModelDB(this SettingDTO Setting)
+        {
+            return new Setting
+            {
+                Id = Setting.Id,
+                SettingKey = Setting.SettingKey,
+                SettingValue = Setting.SettingValue
+            };
+        }
+        public static List<Setting> ToModelDB(this List<SettingDTO>? Setting)
+        {
+            List<Setting> List = new List<Setting>();
+
+            foreach (SettingDTO setting in Setting)
+            {
+                List.Add(setting.ToModelDB());
+            }
+            return List;
+        }
+        #endregion
     }
 }

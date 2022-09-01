@@ -22,6 +22,7 @@ namespace project.data
         public virtual DbSet<Staff> Staffs { get; set; } = null!;
         public virtual DbSet<Stock> Stocks { get; set; } = null!;
         public virtual DbSet<Store> Stores { get; set; } = null!;
+        public virtual DbSet<Setting> Settings { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -324,6 +325,23 @@ namespace project.data
                     .HasMaxLength(5)
                     .IsUnicode(false)
                     .HasColumnName("zip_code");
+            });
+
+            modelBuilder.Entity<Setting>(entity =>
+            {
+                entity.ToTable("settings");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.SettingKey)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("setting_key");
+
+                entity.Property(e => e.SettingValue)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("setting_value");
             });
 
             OnModelCreatingPartial(modelBuilder);

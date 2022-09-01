@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ISettings } from '../dto/isettings.interface';
+import { ISetting } from '../dto/isetting.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +10,16 @@ import { ISettings } from '../dto/isettings.interface';
 
 export class ConfigService {
 
-  private settings = <ISettings[]>[];
+  private setting = <ISetting[]>[];
 
   constructor(private http: HttpClient) {
-    //chiuamo la funzionalità per il recupero dei settings  e ne eseguo lo store nella variabile preposta
-    this.LoadSettings().pipe()
+    //chiuamo la funzionalità per il recupero dei Setting  e ne eseguo lo store nella variabile preposta
+    this.LoadSetting().pipe()
   }
 
-  /**funzione di recupero settings  */
-  private LoadSettings() : Observable<ISettings[]> {
-    return this.http.get<ISettings[]>("https://localhost:7124/api/Settings")
+  /**funzione di recupero Setting  */
+  private LoadSetting() : Observable<ISetting[]> {
+    return this.http.get<ISetting[]>("https://localhost:7124/api/Setting")
   }
 
   /**
@@ -29,8 +29,8 @@ export class ConfigService {
    */
   public GetValue(keyToSearch: string): any{ 
    
-    if (this.settings != null && this.settings.length > 0) {
-      var item = this.settings.filter((el) => { return el.key === keyToSearch });
+    if (this.setting != null && this.setting.length > 0) {
+      var item = this.setting.filter((el) => { return el.key === keyToSearch });
       return (item.length > 0) ? item[0].value : null;
     }
     return null;
