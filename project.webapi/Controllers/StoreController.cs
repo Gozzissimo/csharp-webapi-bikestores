@@ -31,7 +31,7 @@ namespace project.webapi.Controllers
 
         //GETbyId: api/Stores/5
         [HttpGet("{Id}")]
-        public async Task<ActionResult<StoreDTO>> FindById(int Id)
+        public async Task<ActionResult<StoreDTO>> FindByIdAsync(int Id)
         {
             var data = await _worker.FindByIdAsync(Id);
 

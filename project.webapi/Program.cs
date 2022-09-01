@@ -42,6 +42,7 @@ namespace project.webapi
             builder.Services.AddScoped<IWorker<Stock>, StockWorker>();
             builder.Services.AddScoped<IWorker<Store>, StoreWorker>();
             builder.Services.AddScoped<IWorker<OrderItem>, OrderItemWorker>();
+            builder.Services.AddScoped<IWorker<Setting>, SettingWorker>();
 
             var app = builder.Build();
 

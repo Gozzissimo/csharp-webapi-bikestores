@@ -19,10 +19,10 @@ export class BrandsComponent implements OnInit {
 
   constructor(private brandService: BrandService) { }
 
-  public GetBrands() {
+  public GetAsync() {
     this.loading = true;
     this.errorMessage = "";
-    this.brandService.GetBrands()
+    this.brandService.GetAsync()
       .subscribe(
         (response) => {                           //next() callback
           this.brands = response;
@@ -37,32 +37,33 @@ export class BrandsComponent implements OnInit {
           this.loading = false;
         })
   }
-  public GetBrandsById() {
-    this.loading = true;
-    this.errorMessage = "";
-    this.brandService.GetBrandsById(1)
-      .subscribe(
-        (response) => {                           //next() callback
-          console.log(this.brands)
-          if (this.brands) {
-            this.brands.push(response);
-          }
-          else {
-            let arr = [];
-            arr.push(response);
-            this.brands = arr;
-          }
-        },
-        (error) => {                              //error() callback
-          console.error('Request failed with error')
-          this.errorMessage = error;
-          this.loading = false;
-        },
-        () => {                                   //complete() callback
-          console.error('Request completed')      //This is actually not needed 
-          this.loading = false;
-        })
-  }
+
+  //public GetBrandsById() {
+  //  this.loading = true;
+  //  this.errorMessage = "";
+  //  this.brandService.GetBrandsById(1)
+  //    .subscribe(
+  //      (response) => {                           //next() callback
+  //        console.log(this.brands)
+  //        if (this.brands) {
+  //          this.brands.push(response);
+  //        }
+  //        else {
+  //          let arr = [];
+  //          arr.push(response);
+  //          this.brands = arr;
+  //        }
+  //      },
+  //      (error) => {                              //error() callback
+  //        console.error('Request failed with error')
+  //        this.errorMessage = error;
+  //        this.loading = false;
+  //      },
+  //      () => {                                   //complete() callback
+  //        console.error('Request completed')      //This is actually not needed 
+  //        this.loading = false;
+  //      })
+  //}
 
   ngOnInit(): void {
   }
