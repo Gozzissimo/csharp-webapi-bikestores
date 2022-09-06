@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ISetting } from '../dto/isetting.interface';
+import { ISetting } from '../dto/ISetting.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +10,23 @@ import { ISetting } from '../dto/isetting.interface';
 export class ConfigService {
 
   public setting = <ISetting[]>[];
+  public settingLoaded: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(private http: HttpClient) {
     //chiamo la funzionalità per il recupero dei Setting  e ne eseguo lo store nella variabile preposta
+    this.isLoading = true;
     this.LoadSetting()
       .subscribe(
         (response) => {                           //next() callback
           this.setting = response;
+          this.isLoading = false;
+          this.settingLoaded = true;
         },
         (error) => {                              //error() callback
           console.error('Request failed with error')
+          this.isLoading = false;
+          this.settingLoaded = false;
         })
   }
 
@@ -30,7 +36,7 @@ export class ConfigService {
   }
 
   /**
-   * REcupero il valore associato ad una chiave
+   * Recupero il valore associato ad una chiave
    * @param keyToSearch Chiave da ricercare
    * @return string | null
    */

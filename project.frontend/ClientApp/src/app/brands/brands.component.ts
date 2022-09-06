@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BrandService } from '../services/brand.service';
 import { Brand } from '../dto/brand.model'
 
+
 @Component({
   selector: 'app-brands',
   templateUrl: './brands.component.html',
@@ -12,7 +13,7 @@ export class BrandsComponent implements OnInit {
 
   title = 'Brands';
   brands!: Brand[];
-  //brandById!: string;
+  brandById!: Brand;
 
   loading: boolean = false;
   errorMessage!: string;
@@ -25,6 +26,7 @@ export class BrandsComponent implements OnInit {
     this.brandService.GetAsync()
       .subscribe(
         (response) => {                           //next() callback
+          //console.log('OK')
           this.brands = response;
         },
         (error) => {                              //error() callback
@@ -38,34 +40,35 @@ export class BrandsComponent implements OnInit {
         })
   }
 
-  //public GetBrandsById() {
-  //  this.loading = true;
-  //  this.errorMessage = "";
-  //  this.brandService.GetBrandsById(1)
-  //    .subscribe(
-  //      (response) => {                           //next() callback
-  //        console.log(this.brands)
-  //        if (this.brands) {
-  //          this.brands.push(response);
-  //        }
-  //        else {
-  //          let arr = [];
-  //          arr.push(response);
-  //          this.brands = arr;
-  //        }
-  //      },
-  //      (error) => {                              //error() callback
-  //        console.error('Request failed with error')
-  //        this.errorMessage = error;
-  //        this.loading = false;
-  //      },
-  //      () => {                                   //complete() callback
-  //        console.error('Request completed')      //This is actually not needed 
-  //        this.loading = false;
-  //      })
-  //}
+  public FindByIdAsync(id: number) {
+    this.loading = true;
+    this.errorMessage = "";
+    this.brandService.FindByIdAsync(id)
+      .subscribe(
+        (response) => {                           //next() callback
+          if (this.brands) {
+            this.brands = [];
+            this.brands.push(response);
+          }
+          else {
+            let arr = [];
+            arr.push(response);
+            this.brands = arr;
+          }
+        },
+        (error) => {                              //error() callback
+          console.error('Request failed with error')
+          this.errorMessage = error;
+          this.loading = false;
+        },
+        () => {                                   //complete() callback
+          console.info('Request completed')      //This is actually not needed 
+          this.loading = false;
+        })
+  }
 
   ngOnInit(): void {
+    /*this.GetAsync();*/
   }
 
 }

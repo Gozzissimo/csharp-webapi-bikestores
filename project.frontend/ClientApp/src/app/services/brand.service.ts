@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Brand } from '../dto/brand.model';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
 import { ConfigService } from './config.service';
 import { IApiService } from '../dto/IApiService.interface';
 
@@ -13,50 +12,41 @@ import { IApiService } from '../dto/IApiService.interface';
 export class BrandService implements IApiService<Brand> {
 
   constructor(private http: HttpClient, private conf: ConfigService) {
-  }
-    GetAsync(): Observable<Brand[]> {
-      if (this.conf.setting && this.conf.setting.length > 0) {
-        return this.http.get<Brand[]>(`${this.conf.GetValue("urlApi")}/brand`);
-      }
-      return new Observable<Brand[]>();
+      //console.table([this.conf.isLoading, this.conf.settingLoaded]);
   }
 
-
-    FindByIdAsync(id: number): Observable<Brand>;
-    FindByIdAsync(firstId: number, secondId: number): Observable<Brand>;
-    FindByIdAsync(element: Brand): Observable<Brand>;
-    FindByIdAsync(id: number): Observable<Brand>;
-    FindByIdAsync(firstId: any, secondId?: any): Observable<Brand> {
-        throw new Error('Method not implemented.');
-    }
-    CreateAsync(element: Brand): Observable<Brand> {
-        throw new Error('Method not implemented.');
-    }
-    UpdateAsync(element: Brand): Observable<Brand> {
-        throw new Error('Method not implemented.');
-    }
-    DeleteAsync(id: number): Observable<Brand>;
-    DeleteAsync(element: Brand): Observable<Brand>;
-    DeleteAsync(element: any): Observable<Brand> {
-        throw new Error('Method not implemented.');
-    }
-
-  /**
-   * Funzione GET per recuperare i brand disponibili da db
-   * 
-   * */
-  GetBrands(): Observable<Brand[]> {
+  GetAsync(): Observable<Brand[]> {
     if (this.conf.setting && this.conf.setting.length > 0) {
       return this.http.get<Brand[]>(`${this.conf.GetValue("urlApi")}/brand`);
     }
+    //console.log("setting non creato")
+    //console.table([this.conf.isLoading, this.conf.settingLoaded]);
     return new Observable<Brand[]>();
   }
 
-  /**
-   * Funzione GETbyId per recuperare un brand da db usando un id
-   * 
-   * */
-  GetBrandsById(id: number): Observable<Brand> {
-    return this.http.get<Brand>(`${this.conf.GetValue("urlApi")}/brand/${id}`)
+  FindByIdAsync(id: number): Observable<Brand> {
+    if(this.conf.setting && this.conf.setting.length > 0) {
+      return this.http.get<Brand>(`${this.conf.GetValue("urlApi")}/brand/${id}`);
+    }
+    return new Observable<Brand>();
+  }
+
+  CreateAsync(element: Brand): Observable<Brand> {
+    if(this.conf.setting && this.conf.setting.length > 0) {
+      return this.http.post<Brand>(`${this.conf.GetValue("urlApi")}/brand`, element);
+    }
+    return new Observable<Brand>();
+  }
+  UpdateAsync(element: Brand): Observable<Brand> {
+    if(this.conf.setting && this.conf.setting.length > 0) {
+      return this.http.put<Brand>(`${this.conf.GetValue("urlApi")}/brand`, element);
+    }
+    return new Observable<Brand>();
+  }
+  DeleteAsync(id: number): Observable<Brand> {
+    if(this.conf.setting && this.conf.setting.length > 0) {
+      return this.http.delete<Brand>(`${this.conf.GetValue("urlApi")}/brand/${id}`);
+    }
+    return new Observable<Brand>();
   }
 }

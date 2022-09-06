@@ -1,0 +1,9 @@
+<h1 class="heading"><strong>HTTP </strong>Create New Brand</h1>
+
+<form [formGroup]="brandForm" (ngSubmit)="CreateAsync()" novalidate>
+  <div class="form-group">
+    <label>Brand Name</label>
+    <input type="text" formControlName="brandName" class="form-control">
+  </div>
+  <button type="submit">Submit</button>
+</form>

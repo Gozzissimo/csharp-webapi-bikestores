@@ -1,7 +1,10 @@
 <h1 class="heading"><strong>HTTP </strong>Brand</h1>
 
+<a class="nav-link text-dark" [routerLink]="['/brands/new']">Create new Brand</a>
+  
 <div class="form-group">
   <button type="button" (click)="GetAsync()">Get Brands</button>
+  <button type="button" (click)="FindByIdAsync(1)">Find by Id</button>
 </div>
 
 <div *ngIf="loading">loading...</div>
@@ -10,18 +13,24 @@
   <strong>Warning!</strong> {{errorMessage | json}}
 </div>
 
-
 <table class='table'>
   <thead>
     <tr>
-      <th>brandId</th>
-      <th>brandName</th>
+      <th>Brand id</th>
+      <th>Brand Name</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let brand of brands;">
       <td>{{brand.brandId}}</td>
       <td>{{brand.brandName}}</td>
+      <td>
+        <!--<button type="button" (click)="share()">Share</button>-->
+        <button type="button" [routerLink]="['/brands/show/',brand.brandId]">Show</button>
+        <button type="button" [routerLink]="['/brands/edit/',brand.brandId]">Edit</button>
+        <!-- NESSUN SUGGERIMENTO DALL'IDE -->
+      </td>
     </tr>
   </tbody>
 </table>
