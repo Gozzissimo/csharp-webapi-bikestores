@@ -2,15 +2,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Brand } from '../../dto/brand.model';
 import { BrandService } from '../../services/brand.service';
 import { Component, OnInit } from '@angular/core';
-import { BrandsComponent } from '../brands.component';
-import { Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-update-brand',
   templateUrl: './update-brand.component.html',
   styleUrls: ['./update-brand.component.css'],
-  providers: [BrandService]
 })
 export class UpdateBrandComponent implements OnInit {
   brandId!: number;

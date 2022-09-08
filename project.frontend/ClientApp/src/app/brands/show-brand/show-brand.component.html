@@ -1,3 +1,11 @@
-<h1>{{actualBrand.brandName}}</h1>
+<div *ngIf="isLoading">
+  <h1>Loading data...</h1>
+</div>
 
-<button type="button" (click)="DeleteAsync(brandId)">Delete</button>
+<div *ngIf="!isLoading">
+  <h1>{{actualBrand.brandName}}</h1>
+  <button type="button" (click)="DeleteAsync(brandId)">Delete</button>
+</div>
+
+
+

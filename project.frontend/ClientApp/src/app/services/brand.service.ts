@@ -15,6 +15,10 @@ export class BrandService implements IApiService<Brand> {
       //console.table([this.conf.isLoading, this.conf.settingLoaded]);
   }
 
+  GetConf(): ConfigService {
+    return this.conf;
+  }
+
   GetAsync(): Observable<Brand[]> {
     if (this.conf.setting && this.conf.setting.length > 0) {
       return this.http.get<Brand[]>(`${this.conf.GetValue("urlApi")}/brand`);
@@ -25,9 +29,12 @@ export class BrandService implements IApiService<Brand> {
   }
 
   FindByIdAsync(id: number): Observable<Brand> {
-    if(this.conf.setting && this.conf.setting.length > 0) {
+    console.log("FindByIdAsync")
+    if (this.conf.setting && this.conf.setting.length > 0) {
+      console.log("FindByIdAsync Endpoint Call")
       return this.http.get<Brand>(`${this.conf.GetValue("urlApi")}/brand/${id}`);
     }
+    console.log("FindByIdAsync End with empy Obs")
     return new Observable<Brand>();
   }
 
