@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Brand } from '../../dto/brand.model';
 import { BrandService } from '../../services/brand.service';
 
@@ -7,19 +8,21 @@ import { BrandService } from '../../services/brand.service';
   selector: 'app-create-brand',
   templateUrl: './create-brand.component.html',
   styleUrls: ['./create-brand.component.css'],
-  providers: [BrandService]
 })
+
 export class CreateBrandComponent implements OnInit {
 
   constructor(
     private brandService: BrandService,
-    public fb: FormBuilder
+    private router: Router,
+    public formBuilder: FormBuilder
   ) { }
 
   brandForm!: FormGroup;
 
   ngOnInit() {
-    this.brandForm = this.fb.group({
+    //BUILDER DEL FORM
+    this.brandForm = this.formBuilder.group({
       brandName: ['']
     })
   }
@@ -27,6 +30,7 @@ export class CreateBrandComponent implements OnInit {
   loading: boolean = false;
   errorMessage!: string;
 
+  //FUNZIONE PER CREARE L'OGGETTO
   public CreateAsync() {
 
     this.loading = true;
@@ -34,7 +38,7 @@ export class CreateBrandComponent implements OnInit {
     this.brandService.CreateAsync(<Brand>this.brandForm.value)
       .subscribe(
         (response) => {                           //next() callback
-          //QUA PORTEREI L'UTENTE SULLA SHOW DEL NUOVO ID
+          this.router.navigate(['/brands']);
         },
         (error) => {                              //error() callback
           console.error('Request failed with error')
