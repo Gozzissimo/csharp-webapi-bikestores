@@ -25,7 +25,7 @@ export class ShowBrandComponent implements OnInit {
   }
 
   private TempFunction(): any {
-    console.log("Valore isLoadingSetting Conf " + this.brandService.GetConf().isLoading)
+    //console.log("Valore isLoadingSetting Conf " + this.brandService.GetConf().isLoading)
   }
 
   ngOnInit(): void {

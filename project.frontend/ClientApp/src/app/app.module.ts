@@ -12,6 +12,8 @@ import { CreateBrandComponent } from './brands/create-brand/create-brand.compone
 import { UpdateBrandComponent } from './brands/update-brand/update-brand.component';
 import { ShowBrandComponent } from './brands/show-brand/show-brand.component';
 import { DeleteBrandComponent } from './brands/delete-brand/delete-brand.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { DeleteBrandComponent } from './brands/delete-brand/delete-brand.compone
     CreateBrandComponent,
     UpdateBrandComponent,
     ShowBrandComponent,
-    DeleteBrandComponent
+    DeleteBrandComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,7 +37,9 @@ import { DeleteBrandComponent } from './brands/delete-brand/delete-brand.compone
       { path: 'brands/edit/:brandId', component: UpdateBrandComponent },
       { path: 'brands/delete/:brandId', component: DeleteBrandComponent },
     ]),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
