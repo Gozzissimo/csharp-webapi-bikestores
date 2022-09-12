@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Brand } from '../dto/brand.model';
+import { Brand } from '../dto/Brand.interface';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from './config.service';
@@ -20,40 +20,27 @@ export class BrandService implements IApiService<Brand> {
   }
 
   GetAsync(): Observable<Brand[]> {
-    if (this.conf.setting && this.conf.setting.length > 0) {
-      return this.http.get<Brand[]>(`${this.conf.GetValue("urlApi")}/brand`);
-    }
-    //console.log("setting non creato")
-    //console.table([this.conf.isLoading, this.conf.settingLoaded]);
-    return new Observable<Brand[]>();
+    console.log("GetAsync")
+    return this.http.get<Brand[]>(`${this.conf.GetValue("urlApi")}/brand`);
   }
 
   FindByIdAsync(id: number): Observable<Brand> {
     console.log("FindByIdAsync")
-    if (this.conf.setting && this.conf.setting.length > 0) {
-      console.log("FindByIdAsync Endpoint Call")
       return this.http.get<Brand>(`${this.conf.GetValue("urlApi")}/brand/${id}`);
-    }
-    console.log("FindByIdAsync End with empy Obs")
-    return new Observable<Brand>();
   }
 
   CreateAsync(element: Brand): Observable<Brand> {
-    if(this.conf.setting && this.conf.setting.length > 0) {
+    console.log("CreateAsync")
       return this.http.post<Brand>(`${this.conf.GetValue("urlApi")}/brand`, element);
-    }
-    return new Observable<Brand>();
   }
+
   UpdateAsync(element: Brand): Observable<Brand> {
-    if(this.conf.setting && this.conf.setting.length > 0) {
+    console.log("UpdateAsync")
       return this.http.put<Brand>(`${this.conf.GetValue("urlApi")}/brand`, element);
-    }
-    return new Observable<Brand>();
   }
+
   DeleteAsync(id: number): Observable<Brand> {
-    if(this.conf.setting && this.conf.setting.length > 0) {
+    console.log("DeleteAsync")
       return this.http.delete<Brand>(`${this.conf.GetValue("urlApi")}/brand/${id}`);
-    }
-    return new Observable<Brand>();
   }
 }

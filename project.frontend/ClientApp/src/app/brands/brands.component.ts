@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandService } from '../services/brand.service';
-import { Brand } from '../dto/brand.model'
+import { Brand } from '../dto/Brand.interface'
+
 
 
 @Component({

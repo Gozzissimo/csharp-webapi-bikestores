@@ -4,16 +4,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
+//HOME AND NAV
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
+
+//BRAND
 import { BrandsComponent } from './brands/brands.component';
 import { CreateBrandComponent } from './brands/create-brand/create-brand.component';
 import { UpdateBrandComponent } from './brands/update-brand/update-brand.component';
 import { ShowBrandComponent } from './brands/show-brand/show-brand.component';
 import { DeleteBrandComponent } from './brands/delete-brand/delete-brand.component';
+
+//MATERIAL UI
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+
+//SERVICES
+import { ConfigService } from './services/config.service';
+import { BrandService } from './services/brand.service';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -24,7 +34,7 @@ import { MatButtonModule } from '@angular/material/button';
     CreateBrandComponent,
     UpdateBrandComponent,
     ShowBrandComponent,
-    DeleteBrandComponent,
+    DeleteBrandComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,12 +46,22 @@ import { MatButtonModule } from '@angular/material/button';
       { path: 'brands/show/:brandId', component: ShowBrandComponent },
       { path: 'brands/edit/:brandId', component: UpdateBrandComponent },
       { path: 'brands/delete/:brandId', component: DeleteBrandComponent },
+      //{ path: 'products', component: ProductsComponent },
+      //{ path: 'products/new', component: CreateProductComponent },
+      //{ path: 'products/show/:productId', component: ShowProductComponent },
+      //{ path: 'products/edit/:productId', component: UpdateProductComponent },
+      //{ path: 'products/delete/:productId', component: DeleteProductComponent },
     ]),
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    StoreModule.forRoot({}, {})
   ],
-  providers: [],
+  providers: [
+    ConfigService,
+    BrandService
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,9 +12,6 @@ export class ConfigService {
   public setting = <ISetting[]>[];
   public settingLoaded: boolean = false;
   public isLoading: boolean = false;
-  public testBoolean: Observable<boolean> = new Observable((observer) => {
-    observer.next(false)
-  });
 
   constructor(private http: HttpClient) {
     //chiamo la funzionalità per il recupero dei Setting  e ne eseguo lo store nella variabile preposta
@@ -30,9 +27,6 @@ export class ConfigService {
           this.setting = response;
           this.isLoading = false;
           this.settingLoaded = true;
-          //this.testBoolean.subscribe({
-          //  next
-          //})
           console.log("ReloadConf END")
         },
         (error) => {                              //error() callback

@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Brand } from '../../dto/brand.model';
+import { Brand } from '../../dto/Brand.interface';
 import { BrandService } from '../../services/brand.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
