@@ -25,6 +25,7 @@ import { ConfigService } from './services/config.service';
 import { BrandService } from './services/brand.service';
 import { StoreModule } from '@ngrx/store';
 import { APP_INITIALIZER } from '@angular/core';
+import { FilterPipe } from './Utilities/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { APP_INITIALIZER } from '@angular/core';
     UpdateBrandComponent,
     ShowBrandComponent,
     DeleteBrandComponent,
+    FilterPipe,
 
   ],
   imports: [

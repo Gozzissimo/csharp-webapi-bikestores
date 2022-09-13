@@ -2,9 +2,15 @@
 
 <button mat-raised-button color="primary" class="button" [routerLink]="['new']">Create new Brand</button>
 
-<div class="form-group">
-  <!--<button class="button" mat-raised-button type="button" (click)="FindByIdAsync(1)">Find by Id</button>-->
-</div>
+<!--<button class="button" mat-raised-button type="button" (click)="FindByIdAsync(1)">Find by Id</button>-->
+
+<!--FILTRO IN SVILUPPO-->
+<!--<div>
+  <input type="text"
+         class="form-control"
+         placeholder="Search by name"
+         [{ngModel}]="filterText">
+</div>-->
 
 <div *ngIf="loading">loading...</div>
 
