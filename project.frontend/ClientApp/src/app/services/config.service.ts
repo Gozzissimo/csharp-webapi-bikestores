@@ -9,37 +9,42 @@ import { ISetting } from '../dto/ISetting.interface';
 
 export class ConfigService {
 
-  public setting = <ISetting[]>[];
+  public setting? = <ISetting[]>[];
   public settingLoaded: boolean = false;
   public isLoading: boolean = false;
 
   constructor(private http: HttpClient) {
-    //chiamo la funzionalità per il recupero dei Setting  e ne eseguo lo store nella variabile preposta
-    this.ReloadConf();
+    //chiamo la funzionalità per il recupero dei Setting  e ne eseguo lo store nella variabile setting
+    this.load();
   }
 
-  public ReloadConf() {
-    console.log("ReloadConf Start")
-    this.isLoading = true;
-    this.LoadSetting()
-      .subscribe(
-        (response) => {                           //next() callback
-          this.setting = response;
-          this.isLoading = false;
-          this.settingLoaded = true;
-          console.log("ReloadConf END")
-        },
-        (error) => {                              //error() callback
-          console.error('Request failed with error')
-          this.isLoading = false;
-          this.settingLoaded = false;
-        })
-  }
-
-  /**funzione di recupero Setting  */
-  public LoadSetting() : Observable<ISetting[]> {
+  load() {
     return this.http.get<ISetting[]>("https://localhost:7124/api/Setting")
+      .toPromise()
+      .then(response => {
+        this.setting = response;
+        this.settingLoaded = true;
+        this.isLoading = false;
+      });
   }
+
+  //public ReloadConf() {
+  //  console.log("ReloadConf Start")
+  //  this.isLoading = true;
+  //  this.LoadSetting()
+  //    .subscribe(
+  //      (response) => {                           //next() callback
+  //        this.setting = response;
+  //        this.isLoading = false;
+  //        this.settingLoaded = true;
+  //        console.log("ReloadConf END")
+  //      },
+  //      (error) => {                              //error() callback
+  //        console.error('Request failed with error')
+  //        this.isLoading = false;
+  //        this.settingLoaded = false;
+  //      })
+  //}
 
   /**
    * Recupero il valore associato ad una chiave

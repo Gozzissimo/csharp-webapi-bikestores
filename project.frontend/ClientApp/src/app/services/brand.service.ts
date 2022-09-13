@@ -11,9 +11,7 @@ import { IApiService } from '../dto/IApiService.interface';
 
 export class BrandService implements IApiService<Brand> {
 
-  constructor(private http: HttpClient, private conf: ConfigService) {
-      //console.table([this.conf.isLoading, this.conf.settingLoaded]);
-  }
+  constructor(private http: HttpClient, private conf: ConfigService) {}
 
   GetConf(): ConfigService {
     return this.conf;

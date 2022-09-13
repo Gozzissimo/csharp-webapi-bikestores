@@ -24,6 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ConfigService } from './services/config.service';
 import { BrandService } from './services/brand.service';
 import { StoreModule } from '@ngrx/store';
+import { APP_INITIALIZER } from '@angular/core';
+
 
 @NgModule({
   declarations: [
@@ -57,8 +59,15 @@ import { StoreModule } from '@ngrx/store';
     MatButtonModule,
     StoreModule.forRoot({}, {})
   ],
-  providers: [
-    ConfigService,
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: (configService: ConfigService) => () =>
+      configService.load(),
+    deps: [
+      ConfigService
+    ],
+    multi: true
+  },
     BrandService
   ],
 
