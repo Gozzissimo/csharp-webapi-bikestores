@@ -26,7 +26,6 @@ import { BrandService } from './services/brand.service';
 import { StoreModule } from '@ngrx/store';
 import { APP_INITIALIZER } from '@angular/core';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,13 +35,14 @@ import { APP_INITIALIZER } from '@angular/core';
     CreateBrandComponent,
     UpdateBrandComponent,
     ShowBrandComponent,
-    DeleteBrandComponent
+    DeleteBrandComponent,
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: HomeComponent},
       { path: 'brands', component: BrandsComponent },
       { path: 'brands/new', component: CreateBrandComponent },
       { path: 'brands/show/:brandId', component: ShowBrandComponent },

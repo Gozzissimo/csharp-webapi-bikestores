@@ -28,22 +28,20 @@ export class ShowBrandComponent implements OnInit {
     //SUBSCRIBE PER RICHIAMARE L'ID DALL'URL
     this._Activatedroute.paramMap.subscribe(params => {
       this.brandId = Number(params.get("brandId"));
-
-      console.log("Precall Brandservice");
       this.brandService
         .FindByIdAsync(this.brandId)
         .pipe(
-          map((res) => this.actualBrand = res)
+          map(
+            (res) => this.actualBrand = res)
         )
-        .subscribe((response) => (this.responseReceived(response)))
-      console.log("Endcall Brandservice");
+        .subscribe(
+          (response) => (this.responseReceived(response)))
     });
   }
 
   private responseReceived(res: Brand) {
     this.isLoading = false;
     this.actualBrand = res;
-    console.log("Call reponseReceived");
   }
 
   //FUNZIONE DELETE
@@ -65,7 +63,6 @@ export class ShowBrandComponent implements OnInit {
             this.loading = false;
           },
           () => {                                   //complete() callback
-            console.info('Request completed')      //This is actually not needed 
             this.loading = false;
           })
     }

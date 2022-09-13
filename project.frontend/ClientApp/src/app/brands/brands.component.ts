@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { BrandService } from '../services/brand.service';
 import { Brand } from '../dto/Brand.interface'
 
-
-
 @Component({
   selector: 'app-brands',
   templateUrl: './brands.component.html',
@@ -19,7 +17,8 @@ export class BrandsComponent implements OnInit {
   loading: boolean = false;
   errorMessage!: string;
 
-  constructor(private brandService: BrandService) { }
+  constructor(private brandService: BrandService) {
+  }
 
   public GetAsync() {
     this.loading = true;
@@ -27,7 +26,6 @@ export class BrandsComponent implements OnInit {
     this.brandService.GetAsync()
       .subscribe(
         (response) => {                           //next() callback
-          //console.log('OK')
           this.brands = response;
         },
         (error) => {                              //error() callback
@@ -36,7 +34,6 @@ export class BrandsComponent implements OnInit {
           this.loading = false;
         },
         () => {                                   //complete() callback
-          console.info('Request completed')      //This is actually not needed 
           this.loading = false;
         })
   }
@@ -70,7 +67,7 @@ export class BrandsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /*this.GetAsync();*/
+    this.GetAsync();
   }
 
 }

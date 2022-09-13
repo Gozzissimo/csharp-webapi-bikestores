@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Brand } from '../../dto/Brand.interface';
 import { BrandService } from '../../services/brand.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,7 +20,11 @@ export class UpdateBrandComponent implements OnInit {
   ) { }
 
   brandId!: number;
-  brandForm!: FormGroup;
+  brandForm: FormGroup =
+    this.formBuilder.group({
+      brandId: [null],
+      brandName: [null]
+    });
 
   ngOnInit() {
     
@@ -32,12 +36,12 @@ export class UpdateBrandComponent implements OnInit {
       //DA RIPROPORRE IN PAGINA
       this.brandService.FindByIdAsync(this.brandId)
         .subscribe((response) => {
-
+          const { brandId, brandName } = response;
           //BUILDER DEL FORM
-          this.brandForm = this.formBuilder.group({
-            brandId: [this.brandId],
-            brandName: [response.brandName]
-          })
+          this.brandForm.patchValue({
+            brandId,
+            brandName
+          });
         });
     })
   }
@@ -50,7 +54,6 @@ export class UpdateBrandComponent implements OnInit {
 
     this.loading = true;
     this.errorMessage = "";
-    console.log(this.brandForm.value);
     this.brandService.UpdateAsync(<Brand>this.brandForm.value)
       .subscribe(
         (response) => {                           //next() callback
@@ -62,7 +65,6 @@ export class UpdateBrandComponent implements OnInit {
           this.loading = false;
         },
         () => {                                   //complete() callback
-          console.info('Request completed')      //This is actually not needed 
           this.loading = false;
         })
   }

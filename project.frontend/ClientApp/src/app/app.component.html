@@ -1,6 +1,24 @@
-<body>
-  <app-nav-menu></app-nav-menu>
-  <div class="container">
+<div *ngIf="settingIsLoading">
+<main class="container">
+  <div >
+    <h1>Assembling of Bycicles in progress...</h1>
+  </div>
+</main>
+</div>
+
+<div *ngIf="settingLoaded">
+<app-nav-menu></app-nav-menu>
+<main class="container">
+  <div >
     <router-outlet></router-outlet>
   </div>
-</body>
+</main>
+</div>
+
+<div *ngIf="settingError">
+  <h1>Error 500, please refresh the page</h1>
+  <img src="https://content.active.com/Assets/Active.com+Content+Site+Digital+Assets/Cycling/Galleries/Cyclists+Fatigue+on+a+Ride/tired+cyclist-carousel.jpg" alt="tired cyclist" />
+</div>
+
+<footer>
+</footer>

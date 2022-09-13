@@ -1,9 +1,8 @@
 <h1 class="heading"><strong>HTTP </strong>Brand</h1>
 
-<button mat-raised-button color="primary" class="button" [routerLink]="['/brands/new']">Create new Brand</button>
-  
+<button mat-raised-button color="primary" class="button" [routerLink]="['new']">Create new Brand</button>
+
 <div class="form-group">
-  <button mat-raised-button type="button" (click)="GetAsync()">Get Brands</button>
   <!--<button class="button" mat-raised-button type="button" (click)="FindByIdAsync(1)">Find by Id</button>-->
 </div>
 
@@ -26,8 +25,8 @@
       <td>{{brand.brandId}}</td>
       <td>{{brand.brandName}}</td>
       <td>
-        <button mat-raised-button color="primary" type="button" [routerLink]="['/brands/show/',brand.brandId]">Show</button>
-        <button mat-raised-button color="accent" type="button" [routerLink]="['/brands/edit/',brand.brandId]">Edit</button>
+        <button mat-raised-button color="primary" type="button" [routerLink]="['show',brand.brandId]">Show</button>
+        <button mat-raised-button color="accent" type="button" [routerLink]="['edit',brand.brandId]">Edit</button>
       </td>
     </tr>
   </tbody>

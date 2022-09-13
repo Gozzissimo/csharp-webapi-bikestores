@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ISetting } from '../dto/ISetting.interface';
 
 @Injectable({
@@ -11,39 +10,40 @@ export class ConfigService {
 
   public setting? = <ISetting[]>[];
   public settingLoaded: boolean = false;
-  public isLoading: boolean = false;
+  public settingIsLoading: boolean = false;
+  public settingError: boolean = false;
 
   constructor(private http: HttpClient) {
-    //chiamo la funzionalità per il recupero dei Setting  e ne eseguo lo store nella variabile setting
+    //Chiamo la funzionalità per il recupero dei Setting
     this.load();
   }
 
-  load() {
+  /**
+   * Faccio una chiamata all'API con promise, il risultato lo salvo in setting
+   * @return ISetting[]
+   */
+  public load() {
+    this.settingIsLoading = true;
     return this.http.get<ISetting[]>("https://localhost:7124/api/Setting")
       .toPromise()
-      .then(response => {
-        this.setting = response;
-        this.settingLoaded = true;
-        this.isLoading = false;
-      });
+      .then(
+        (response) => {
+          this.setting = response;
+          this.settingLoaded = true;
+          this.settingIsLoading = false;
+        },
+        () => {
+          this.settingIsLoading = false;
+          this.settingError = true
+        });
   }
 
-  //public ReloadConf() {
-  //  console.log("ReloadConf Start")
-  //  this.isLoading = true;
-  //  this.LoadSetting()
-  //    .subscribe(
-  //      (response) => {                           //next() callback
-  //        this.setting = response;
-  //        this.isLoading = false;
-  //        this.settingLoaded = true;
-  //        console.log("ReloadConf END")
-  //      },
-  //      (error) => {                              //error() callback
-  //        console.error('Request failed with error')
-  //        this.isLoading = false;
-  //        this.settingLoaded = false;
-  //      })
+  //ALTERNATIVE METHOD
+  //public async load() {
+  //  let response = await this.http.get<ISetting[]>("https://localhost:7124/api/Setting");
+  //  this.setting = await response.toPromise();
+  //  this.settingLoaded = true;
+  //  this.isLoading = false;
   //}
 
   /**
