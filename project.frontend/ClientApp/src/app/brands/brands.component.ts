@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandService } from '../services/brand.service';
-import { Brand } from '../dto/Brand.interface'
-import { FilterPipe } from '../Utilities/filter.pipe'
+import { Brand } from '../dto/Brand.interface';
+import { FilterPipe } from '../Utilities/filter.pipe';
 
 @Component({
   selector: 'app-brands',
@@ -12,7 +12,7 @@ import { FilterPipe } from '../Utilities/filter.pipe'
 export class BrandsComponent implements OnInit {
   private title = 'Brands';
   public brands!: Brand[];
-  //public filterText: string = '';
+  public filterText: string = '';
   public loading: boolean = false;
   public errorMessage!: string;
 

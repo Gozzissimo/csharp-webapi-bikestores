@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //HOME AND NAV
 import { AppComponent } from './app.component';
@@ -38,10 +38,10 @@ import { FilterPipe } from './Utilities/filter.pipe';
     ShowBrandComponent,
     DeleteBrandComponent,
     FilterPipe,
-
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent},

@@ -5,12 +5,13 @@
 <!--<button class="button" mat-raised-button type="button" (click)="FindByIdAsync(1)">Find by Id</button>-->
 
 <!--FILTRO IN SVILUPPO-->
-<!--<div>
+<div>
   <input type="text"
          class="form-control"
          placeholder="Search by name"
-         [{ngModel}]="filterText">
-</div>-->
+         [(ngModel)]="filterText"
+         />
+</div>
 
 <div *ngIf="loading">loading...</div>
 
@@ -27,7 +28,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let brand of brands;">
+    <tr *ngFor="let brand of brands | filterBrand: filterText">
       <td>{{brand.brandId}}</td>
       <td>{{brand.brandName}}</td>
       <td>
