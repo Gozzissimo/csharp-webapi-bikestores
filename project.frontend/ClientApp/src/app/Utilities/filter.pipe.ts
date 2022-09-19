@@ -11,7 +11,7 @@ export class FilterPipe implements PipeTransform {
       return brands;
     } else {
       return brands.filter((brand) => {
-        return brand.brandName.toLowerCase() === filterText.toLowerCase()
+        return brand.brandName.toLowerCase().includes(filterText.toLowerCase())
       })
     }
   }
