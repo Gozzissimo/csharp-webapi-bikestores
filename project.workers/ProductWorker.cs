@@ -41,7 +41,10 @@ namespace project.workers
         #region Async
         public async Task<List<Product>> GetAsync()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products
+                .Include(e => e.Brand)
+                .Include(e => e.Category)
+                .ToListAsync();
         }
 
         public async Task<Product> CreateAsync(Product Product)

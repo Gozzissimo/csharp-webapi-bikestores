@@ -1,17 +1,37 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Brand } from '../dto/Brand.interface';
+import { IFilter } from '../dto/ifilter';
+import { Product } from '../dto/Product.interface';
 
 @Pipe({
-  name: 'filterBrand'
+  name:'filterBrand'
 })
-export class FilterPipe implements PipeTransform {
 
-  transform(brands: Brand[], filterText: string) {
-    if (brands.length === 0 || filterText === '') {
-      return brands;
+export class FilterBrand implements PipeTransform {
+
+  transform(elements: Brand[], filterText: string) {
+    if (!elements || elements.length === 0 || filterText === '') {
+      return elements;
     } else {
-      return brands.filter((brand) => {
-        return brand.brandName.toLowerCase().includes(filterText.toLowerCase())
+      return elements.filter((el) => {
+        return el.brandName.toLowerCase().includes(filterText.toLowerCase())
+      })
+    }
+  }
+}
+
+@Pipe({
+  name: 'filterProduct'
+})
+
+export class FilterProduct implements IFilter<Product>, PipeTransform {
+
+  transform(elements: Product[], filterText: string) {
+    if (!elements || elements.length === 0 || filterText === '') {
+      return elements;
+    } else {
+      return elements.filter((el) => {
+        return el.productName.toLowerCase().includes(filterText.toLowerCase())
       })
     }
   }

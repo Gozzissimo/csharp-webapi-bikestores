@@ -8,3 +8,4 @@ export interface IApiService<T> {
   UpdateAsync(element: T): Observable<T>;
   DeleteAsync(id: number): Observable<T>;
 }
+

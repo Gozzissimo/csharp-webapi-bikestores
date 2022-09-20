@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FilterBrand, FilterProduct } from './Utilities/filter.pipe';
 
 //HOME AND NAV
 import { AppComponent } from './app.component';
@@ -16,6 +17,13 @@ import { UpdateBrandComponent } from './brands/update-brand/update-brand.compone
 import { ShowBrandComponent } from './brands/show-brand/show-brand.component';
 import { DeleteBrandComponent } from './brands/delete-brand/delete-brand.component';
 
+//PRODUCT
+import { ProductsComponent } from './products/products.component';
+import { CreateProductComponent } from './products/create-product/create-product.component';
+import { DeleteProductComponent } from './products/delete-product/delete-product.component';
+import { ShowProductComponent } from './products/show-product/show-product.component';
+import { UpdateProductComponent } from './products/update-product/update-product.component';
+
 //MATERIAL UI
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +33,7 @@ import { ConfigService } from './services/config.service';
 import { BrandService } from './services/brand.service';
 import { StoreModule } from '@ngrx/store';
 import { APP_INITIALIZER } from '@angular/core';
-import { FilterPipe } from './Utilities/filter.pipe';
+
 
 @NgModule({
   declarations: [
@@ -37,24 +45,35 @@ import { FilterPipe } from './Utilities/filter.pipe';
     UpdateBrandComponent,
     ShowBrandComponent,
     DeleteBrandComponent,
-    FilterPipe,
+    ProductsComponent,
+    CreateProductComponent,
+    DeleteProductComponent,
+    ShowProductComponent,
+    UpdateProductComponent,
+    FilterBrand,
+    FilterProduct
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent},
+      //HOME
+      { path: '', component: HomeComponent },
+
+      //BRANDS
       { path: 'brands', component: BrandsComponent },
       { path: 'brands/new', component: CreateBrandComponent },
       { path: 'brands/show/:brandId', component: ShowBrandComponent },
       { path: 'brands/edit/:brandId', component: UpdateBrandComponent },
       { path: 'brands/delete/:brandId', component: DeleteBrandComponent },
-      //{ path: 'products', component: ProductsComponent },
-      //{ path: 'products/new', component: CreateProductComponent },
-      //{ path: 'products/show/:productId', component: ShowProductComponent },
-      //{ path: 'products/edit/:productId', component: UpdateProductComponent },
-      //{ path: 'products/delete/:productId', component: DeleteProductComponent },
+
+      //PRODUCTS
+      { path: 'products', component: ProductsComponent },
+      { path: 'products/new', component: CreateProductComponent },
+      { path: 'products/show/:productId', component: ShowProductComponent },
+      { path: 'products/edit/:productId', component: UpdateProductComponent },
+      { path: 'products/delete/:productId', component: DeleteProductComponent },
     ]),
     ReactiveFormsModule,
     BrowserAnimationsModule,

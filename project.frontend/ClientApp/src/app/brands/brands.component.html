@@ -2,9 +2,7 @@
 
 <button mat-raised-button color="primary" class="button" [routerLink]="['new']">Create new Brand</button>
 
-<!--<button class="button" mat-raised-button type="button" (click)="FindByIdAsync(1)">Find by Id</button>-->
-
-<!--FILTRO IN SVILUPPO-->
+<!--FILTRO-->
 <div>
   <input type="text"
          class="form-control"
@@ -22,14 +20,12 @@
 <table class='table'>
   <thead>
     <tr>
-      <th>Brand id</th>
       <th>Brand Name</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let brand of brands | filterBrand: filterText">
-      <td>{{brand.brandId}}</td>
       <td>{{brand.brandName}}</td>
       <td>
         <button mat-raised-button color="primary" type="button" [routerLink]="['show',brand.brandId]">Show</button>

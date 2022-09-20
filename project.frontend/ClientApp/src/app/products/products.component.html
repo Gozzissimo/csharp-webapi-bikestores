@@ -1,0 +1,43 @@
+<h1 class="heading"><strong>HTTP </strong>Brand</h1>
+
+<button mat-raised-button color="primary" class="button" [routerLink]="['new']">Create new Product</button>
+
+<!--FILTRO-->
+<div>
+  <input type="text"
+         class="form-control"
+         placeholder="Search by name"
+         [(ngModel)]="filterText" />
+</div>
+
+<div *ngIf="loading">loading...</div>
+
+<div *ngIf="errorMessage" class="alert alert-warning">
+  <strong>Warning!</strong> {{errorMessage | json}}
+</div>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Category Name</th>
+      <th>Brand Name</th>
+      <th>Model Year</th>
+      <th>List Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products | filterProduct: filterText">
+      <td>{{product.productName}}</td>
+      <td>{{product.categoryName}}</td>
+      <td>{{product.brandName}}</td>
+      <td>{{product.modelYear}}</td>
+      <td>{{product.listPrice}}</td>
+      <td>
+        <button mat-raised-button color="primary" type="button" [routerLink]="['show',product.productId]">Show</button>
+        <button mat-raised-button color="accent" type="button" [routerLink]="['edit',product.productId]">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
