@@ -27,6 +27,10 @@ import { UpdateProductComponent } from './products/update-product/update-product
 //MATERIAL UI
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSortModule } from '@angular/material/sort';
 
 //SERVICES
 import { ConfigService } from './services/config.service';
@@ -78,6 +82,10 @@ import { APP_INITIALIZER } from '@angular/core';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatProgressBarModule,
     StoreModule.forRoot({}, {})
   ],
   providers: [{

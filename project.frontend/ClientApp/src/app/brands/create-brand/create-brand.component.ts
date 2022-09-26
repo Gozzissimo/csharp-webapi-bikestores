@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Product } from '../../dto/Product.interface';
+import { Brand } from '../../dto/Brand.interface';
 import { BrandService } from '../../services/brand.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { BrandService } from '../../services/brand.service';
 export class CreateBrandComponent implements OnInit {
 
   constructor(
-    // private brandService: BrandService,
+     private brandService: BrandService,
     private router: Router,
     public formBuilder: FormBuilder
   ) { }
@@ -35,7 +35,7 @@ export class CreateBrandComponent implements OnInit {
 
     this.loading = true;
     this.errorMessage = "";
-    /* this.brandService.CreateAsync(<Brand>this.brandForm.value)
+     this.brandService.CreateAsync(<Brand>this.brandForm.value)
       .subscribe(
         (response) => {                           //next() callback
           this.router.navigate(['/brands']);
@@ -48,6 +48,6 @@ export class CreateBrandComponent implements OnInit {
         () => {                                   //complete() callback
           console.info('Request completed')      //This is actually not needed 
           this.loading = false;
-        }) */
+        }) 
   }
 }

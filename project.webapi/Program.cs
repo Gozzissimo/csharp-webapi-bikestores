@@ -18,7 +18,9 @@ namespace project.webapi
                     policy =>
                     {
                         policy.WithOrigins(
-                            "https://localhost:44423")
+                            "https://localhost:44423",
+                            "http://localhost:4200"
+                            )
                         .AllowAnyHeader().AllowAnyMethod();
                     });
             });

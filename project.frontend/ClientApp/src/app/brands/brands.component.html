@@ -7,8 +7,7 @@
   <input type="text"
          class="form-control"
          placeholder="Search by name"
-         [(ngModel)]="filterText"
-         />
+         [(ngModel)]="filterText" />
 </div>
 
 <div *ngIf="loading">loading...</div>
@@ -17,20 +16,33 @@
   <strong>Warning!</strong> {{errorMessage | json}}
 </div>
 
-<table class='table'>
-  <thead>
-    <tr>
-      <th>Brand Name</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let brand of brands | filterBrand: filterText">
-      <td>{{brand.brandName}}</td>
-      <td>
-        <button mat-raised-button color="primary" type="button" [routerLink]="['show',brand.brandId]">Show</button>
-        <button mat-raised-button color="accent" type="button" [routerLink]="['edit',brand.brandId]">Edit</button>
-      </td>
-    </tr>
-  </tbody>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="brandId">
+    <th mat-header-cell *matHeaderCellDef> Brand ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.brandId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="brandName">
+    <th mat-header-cell *matHeaderCellDef> Brand Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.brandName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" type="button" [routerLink]="['show',element.brandId]">Show</button>
+      <button mat-raised-button color="accent" type="button" [routerLink]="['edit',element.brandId]">Edit</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<mat-paginator [pageSizeOptions]="[10, 50, 100]">
+</mat-paginator>
+
+
+
+

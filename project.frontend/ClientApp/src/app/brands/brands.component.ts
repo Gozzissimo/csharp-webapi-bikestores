@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BrandService } from '../services/brand.service';
 import { Brand } from '../dto/Brand.interface';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-brands',
@@ -8,7 +11,7 @@ import { Brand } from '../dto/Brand.interface';
   styleUrls: ['./brands.component.css'],
   providers: [BrandService]
 })
-export class BrandsComponent implements OnInit {
+export class BrandsComponent implements OnInit, AfterViewInit {
   private title = 'Brands';
   public brands!: Brand[];
   public filterText: string = '';
@@ -25,6 +28,7 @@ export class BrandsComponent implements OnInit {
       .subscribe(
         (response) => {                           //next() callback
           this.brands = response;
+          this.dataSource.data = this.brands;
         },
         (error) => {                              //error() callback
           console.error('Request failed with error')
@@ -40,4 +44,15 @@ export class BrandsComponent implements OnInit {
     this.GetAsync();
   }
 
+  //@ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+
+  //dataSource!: MatTableDataSource<Brand>;
+  dataSource = new MatTableDataSource<Brand>();
+
+  displayedColumns = ['brandId','brandName','actions'];
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 }
