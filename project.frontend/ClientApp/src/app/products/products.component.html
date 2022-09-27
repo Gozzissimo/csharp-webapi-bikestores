@@ -1,14 +1,15 @@
-<h1 class="heading"><strong>HTTP </strong>Brand</h1>
-
-<button mat-raised-button color="primary" class="button" [routerLink]="['new']">Create new Product</button>
-
-<!--FILTRO-->
+<h1 class="heading"><strong>HTTP </strong>Product</h1>
 <div>
+  <button mat-raised-button color="primary" class="button" [routerLink]="['new']">Create new Product</button>
+</div>
+
+<!--FILTRO CON PIPE OBSOLETO-->
+<!--<div>
   <input type="text"
          class="form-control"
          placeholder="Search by name"
          [(ngModel)]="filterText" />
-</div>
+</div>-->
 
 <div *ngIf="loading">loading...</div>
 
@@ -16,7 +17,64 @@
   <strong>Warning!</strong> {{errorMessage | json}}
 </div>
 
-<table class='table'>
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Write Here" #input>
+</mat-form-field>
+
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <ng-container matColumnDef="productName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="categoryName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Category Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.categoryName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="brandName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Brand Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.brandName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="modelYear">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Model Year </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.modelYear}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="listPrice">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> ListPrice </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.listPrice}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" type="button" [routerLink]="['show',element.productId]">Show</button>
+      <button mat-raised-button color="accent" type="button" [routerLink]="['edit',element.productId]">Edit</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns"
+           (click)="onRowClicked(row)">
+  </mat-row>
+
+  <!-- Row shown when there is no matching data. -->
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+  </tr>
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="pageSizeOptions">
+</mat-paginator>
+
+
+<!--VECCHIA TABELLA-->
+<!--<table class='table'>
   <thead>
     <tr>
       <th>Product Name</th>
@@ -40,4 +98,4 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table>-->

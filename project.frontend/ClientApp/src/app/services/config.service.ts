@@ -13,16 +13,13 @@ export class ConfigService {
   public settingIsLoading: boolean = false;
   public settingError: boolean = false;
 
-  constructor(private http: HttpClient) {
-    //Chiamo la funzionalità per il recupero dei Setting
-    this.load();
-  }
+  constructor(private http: HttpClient) {}
 
   /**
    * Faccio una chiamata all'API con promise, il risultato lo salvo in setting
    * @return ISetting[]
    */
-  public load() {
+  public loadSettings() {
     this.settingIsLoading = true;
     return this.http.get<ISetting[]>("https://localhost:7124/api/Setting")
       .toPromise()
@@ -45,6 +42,7 @@ export class ConfigService {
   //  this.settingLoaded = true;
   //  this.isLoading = false;
   //}
+
 
   /**
    * Recupero il valore associato ad una chiave

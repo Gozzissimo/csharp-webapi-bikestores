@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Brand } from '../dto/Brand.interface';
-import { IFilter } from '../dto/ifilter';
+import { IFilter } from '../dto/IFilter';
 import { Product } from '../dto/Product.interface';
 
 @Pipe({

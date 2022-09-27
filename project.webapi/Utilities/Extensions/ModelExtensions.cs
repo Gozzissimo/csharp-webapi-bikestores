@@ -224,7 +224,9 @@ namespace project.webapi.Utilities.Extensions
                 ProductId = Product.ProductId,
                 ProductName = Product.ProductName,
                 BrandId = Product.BrandId,
+                //BrandName = Product.Brand.BrandName,
                 CategoryId = Product.CategoryId,
+                //CategoryName = Product.Category.CategoryName,
                 ModelYear = Product.ModelYear,
                 ListPrice = Product.ListPrice
             };

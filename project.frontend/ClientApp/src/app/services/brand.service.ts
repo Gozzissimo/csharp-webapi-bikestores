@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Brand } from '../dto/Brand.interface';
-import { Observable, throwError } from 'rxjs';
+import { map, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from './config.service';
 import { IApiService } from '../dto/IApiService.interface';
@@ -11,7 +11,9 @@ import { IApiService } from '../dto/IApiService.interface';
 
 export class BrandService implements IApiService<Brand> {
 
-  constructor(private http: HttpClient, private conf: ConfigService) {}
+  constructor(
+    private http: HttpClient,
+    private conf: ConfigService,  ) { }
 
   GetAsync(): Observable<Brand[]> {
     return this.http.get<Brand[]>(`${this.conf.GetValue("urlApi")}/brand`);

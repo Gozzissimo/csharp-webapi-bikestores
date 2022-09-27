@@ -31,12 +31,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from "@angular/material/input";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 //SERVICES
 import { ConfigService } from './services/config.service';
 import { BrandService } from './services/brand.service';
 import { StoreModule } from '@ngrx/store';
 import { APP_INITIALIZER } from '@angular/core';
+import { ProductService } from './services/product.service';
 
 
 @NgModule({
@@ -86,18 +89,21 @@ import { APP_INITIALIZER } from '@angular/core';
     MatSortModule,
     MatTableModule,
     MatProgressBarModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
     StoreModule.forRoot({}, {})
   ],
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: (configService: ConfigService) => () =>
-      configService.load(),
+      configService.loadSettings(),
     deps: [
       ConfigService
     ],
     multi: true
   },
-    BrandService
+    BrandService,
+    ProductService,
   ],
 
   bootstrap: [AppComponent]

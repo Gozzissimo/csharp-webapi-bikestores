@@ -18,8 +18,7 @@ export class BrandsComponent implements OnInit, AfterViewInit {
   public loading: boolean = false;
   public errorMessage!: string;
 
-  constructor(private brandService: BrandService) {
-  }
+  constructor(private brandService: BrandService) { }
 
   public GetAsync() {
     this.loading = true;
@@ -44,15 +43,31 @@ export class BrandsComponent implements OnInit, AfterViewInit {
     this.GetAsync();
   }
 
-  //@ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-
-  //dataSource!: MatTableDataSource<Brand>;
-  dataSource = new MatTableDataSource<Brand>();
-
-  displayedColumns = ['brandId','brandName','actions'];
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  //SEZIONE MAT-TABLE
+  public pageSizeOptions = [10,25,50]
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+
+  dataSource = new MatTableDataSource<Brand>();
+
+  displayedColumns = ['brandName', 'actions'];
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  //FUNZIONE CHE MOSTRA LA ROW CLICCANDOLA
+  onRowClicked(row: any) {
+    console.log('Row clicked: ', row);
   }
 }
