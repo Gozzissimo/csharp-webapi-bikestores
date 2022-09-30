@@ -33,6 +33,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSelectModule } from '@angular/material/select';
 
 //SERVICES
 import { ConfigService } from './services/config.service';
@@ -91,6 +92,7 @@ import { ProductService } from './services/product.service';
     MatProgressBarModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     StoreModule.forRoot({}, {})
   ],
   providers: [{

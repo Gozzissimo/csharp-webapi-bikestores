@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Brand } from '../../dto/Brand.interface';
 import { BrandService } from '../../services/brand.service';
@@ -13,7 +13,7 @@ import { BrandService } from '../../services/brand.service';
 export class CreateBrandComponent implements OnInit {
 
   constructor(
-     private brandService: BrandService,
+    private brandService: BrandService,
     private router: Router,
     public formBuilder: FormBuilder
   ) { }

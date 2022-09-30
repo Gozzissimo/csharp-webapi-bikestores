@@ -1,9 +1,11 @@
 <h1 class="heading"><strong>HTTP </strong>Create New Brand</h1>
 
-<form [formGroup]="brandForm" (ngSubmit)="CreateAsync()" novalidate>
-  <div class="form-group">
-    <label>Brand Name</label>
-    <input type="text" formControlName="brandName" class="form-control">
+<form [formGroup]="brandForm" (ngSubmit)="CreateAsync()">
+  <mat-form-field appearance="legacy">
+    <mat-label>Brand Name</mat-label>
+    <input required matInput type="text" formControlName="brandName">
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
   </div>
-  <button mat-raised-button color="primary"type="submit">Submit</button>
 </form>
