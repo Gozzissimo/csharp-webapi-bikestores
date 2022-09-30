@@ -199,9 +199,9 @@ namespace project.webapi.Utilities.Extensions
                 ProductId = Product.ProductId,
                 ProductName = Product.ProductName,
                 BrandId = Product.BrandId,
-                BrandName = Product.Brand.BrandName,
+                BrandName = (Product.Brand == null) ? null : Product.Brand.BrandName,
                 CategoryId = Product.CategoryId,
-                CategoryName = Product.Category.CategoryName,
+                CategoryName = (Product.Category == null) ? null : Product.Category.CategoryName,
                 ModelYear = Product.ModelYear,
                 ListPrice = Product.ListPrice
             };
@@ -224,9 +224,7 @@ namespace project.webapi.Utilities.Extensions
                 ProductId = Product.ProductId,
                 ProductName = Product.ProductName,
                 BrandId = Product.BrandId,
-                //BrandName = Product.Brand.BrandName,
                 CategoryId = Product.CategoryId,
-                //CategoryName = Product.Category.CategoryName,
                 ModelYear = Product.ModelYear,
                 ListPrice = Product.ListPrice
             };

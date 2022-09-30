@@ -64,8 +64,6 @@ export class CreateProductComponent implements OnInit {
       productName: [''],
       modelYear: [''],
       listPrice: [''],
-      brandName: this.brands,
-      categoryName: this.categories,
       brandId: this.brands,
       categoryId: this.categories
     })

@@ -49,8 +49,13 @@ namespace project.workers
 
         public async Task<Product> CreateAsync(Product Product)
         {
-            _context.Products.Add(Product);
+            await _context.Products.AddAsync(Product);
             await _context.SaveChangesAsync();
+            Product = await _context.Products
+                .Include(e => e.Brand)
+                .Include(e => e.Category)
+                .Where(e => e.ProductId == Product.ProductId)
+                .FirstOrDefaultAsync();
             return Product;
         }
 
