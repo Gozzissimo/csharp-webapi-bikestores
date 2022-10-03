@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 import { Brand } from '../../dto/Brand.interface';
 import { BrandService } from '../../services/brand.service';

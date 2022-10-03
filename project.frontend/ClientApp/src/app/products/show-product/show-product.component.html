@@ -1,1 +1,12 @@
-<p>show-product works!</p>
+<div *ngIf="isLoading">
+  <h1>Loading data...</h1>
+</div>
+
+<div *ngIf="!isLoading">
+  <h1>{{ actualProduct.productName }}</h1>
+  <h2>Brand: {{ actualProduct.brandName }}</h2>
+  <p>Categoria: {{ actualProduct.categoryName }}</p>
+  <p>Anno di produzione: {{ actualProduct.modelYear }} </p>
+  <p>Prezzo di Listino: {{ actualProduct.listPrice }} &#8364;</p>
+  <button mat-raised-button color="warn" class="button" type="button" (click)="DeleteAsync(productId)">Delete</button>
+</div>

@@ -54,8 +54,7 @@ namespace project.workers
             Product = await _context.Products
                 .Include(e => e.Brand)
                 .Include(e => e.Category)
-                .Where(e => e.ProductId == Product.ProductId)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(e => e.ProductId == Product.ProductId);
             return Product;
         }
 
@@ -77,7 +76,13 @@ namespace project.workers
 
         public async Task<Product> FindByIdAsync(int id)
         {
-            return await _context.Products.FindAsync(id);
+            //return await _context.Products.FindAsync(id);
+
+            var product = await _context.Products
+                .Include(e => e.Brand)
+                .Include(e => e.Category)
+                .FirstOrDefaultAsync(e => e.ProductId == id);
+            return product;
         }
 
         public Task<Product> DeleteAsync(Product element)
