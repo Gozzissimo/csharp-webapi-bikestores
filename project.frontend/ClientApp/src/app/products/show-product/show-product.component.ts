@@ -27,15 +27,16 @@ export class ShowProductComponent implements OnInit {
     //SUBSCRIBE PER RICHIAMARE L'ID DALL'URL
     this._Activatedroute.paramMap.subscribe(params => {
       this.productId = Number(params.get("productId"));
-      this.productService
-        .FindByIdAsync(this.productId)
-        .pipe(
-          map(
-            (res) => this.actualProduct = res)
-        )
-        .subscribe(
-          (response) => (this.responseReceived(response)))
     });
+
+    this.productService
+      .FindByIdAsync(this.productId)
+      .pipe(
+        map(
+          (res) => this.actualProduct = res)
+      )
+      .subscribe(
+        (response) => (this.responseReceived(response)))
   }
 
   private responseReceived(res: Product) {

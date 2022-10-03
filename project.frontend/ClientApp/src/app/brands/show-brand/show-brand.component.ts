@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { map, switchMap } from 'rxjs';
 import { Brand } from '../../dto/Brand.interface';
 import { BrandService } from '../../services/brand.service';
 
@@ -19,23 +19,52 @@ export class ShowBrandComponent implements OnInit {
     private _Activatedroute: ActivatedRoute,
     private brandService: BrandService,
     private router: Router
-  ) {
-  }
+  ) { }
+
+  //GetParams() {
+  //  this._Activatedroute.params.subscribe(param => {
+  //    this.brandId = Number(param);
+  //    console.log(param);
+  //  })
+  //}
+
+  //GetParamMap() {
+  //  this._Activatedroute.paramMap
+  //    .subscribe(params => {
+  //      this.brandId = Number(params.get("brandId"));
+  //      console.log(params)
+  //    });
+  //}
+
+  //GetId() {
+  //  this.brandService.FindByIdAsync(this.brandId)
+  //    .pipe(map((res) => this.actualBrand = res))
+  //    .subscribe(
+  //      (response) => (this.responseReceived(response)))
+  //}
 
   ngOnInit(): void {
 
-    //SUBSCRIBE PER RICHIAMARE L'ID DALL'URL
-    this._Activatedroute.paramMap.subscribe(params => {
-      this.brandId = Number(params.get("brandId"));
-      this.brandService
-        .FindByIdAsync(this.brandId)
-        .pipe(
-          map(
-            (res) => this.actualBrand = res)
-        )
-        .subscribe(
-          (response) => (this.responseReceived(response)))
-    });
+    this.actualBrand = this._Activatedroute.paramMap.pipe(
+      switchMap((params: ParamMap) => this.brandId = Number(params.get("brandId")),
+        this.brandService.FindByIdAsync(this.brandId)));
+
+    //this.GetParamMap()
+    //this.GetParams()
+
+    //this._Activatedroute
+    //  .paramMap
+    //  .subscribe(params => {
+    //    this.brandId = Number(params.get("brandId"));
+    //    this.brandService
+    //      .FindByIdAsync(this.brandId)
+    //      .pipe(
+    //        map(
+    //          (res) => this.actualBrand = res)
+    //      )
+    //      .subscribe(
+    //        (response) => (this.responseReceived(response)))
+    //  });
   }
 
   private responseReceived(res: Brand) {
