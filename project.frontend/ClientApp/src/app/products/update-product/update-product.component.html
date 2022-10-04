@@ -1,1 +1,46 @@
-<h1 class="heading"><strong>HTTP </strong>Update Product</h1>
+<h1 class="heading"><strong>HTTP </strong>Create New Product</h1>
+
+<form [formGroup]="productForm" (ngSubmit)="UpdateAsync()">
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Product Name</mat-label>
+      <input required matInput type="text" formControlName="productName">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Brand Name</mat-label>
+      <mat-select required formControlName="brandId" name="brand">
+        <mat-option *ngFor="let brand of brands" [value]="brand.brandId">{{ brand.brandName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Category Name</mat-label>
+      <mat-select required formControlName="categoryId" name="category">
+        <mat-option *ngFor="let category of categories" [value]="category.categoryId">{{ category.categoryName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Model Year</mat-label>
+      <input required matInput type="number" min="1900" max="2099" step="1" formControlName="modelYear">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>List Price</mat-label>
+      <input required matInput type="number" min="1" step="any" formControlName="listPrice">
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </div>
+</form>

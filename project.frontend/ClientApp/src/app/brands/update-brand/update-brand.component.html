@@ -1,9 +1,11 @@
 <h1 class="heading"><strong>HTTP </strong>Update Brand</h1>
 
-<form [formGroup]="brandForm" (ngSubmit)="UpdateAsync()" novalidate>
-  <div class="form-group">
-    <label>Brand Name</label>
-    <input type="text" formControlName="brandName" class="form-control">
+<form [formGroup]="brandForm" (ngSubmit)="UpdateAsync()">
+  <div>
+    <mat-form-field>
+      <mat-label>Brand Name</mat-label>
+      <input matInput required type="text" formControlName="brandName">
+    </mat-form-field>
   </div>
-  <button mat-raised-button color="primary" type="submit" >Submit</button>
+  <button mat-raised-button color="primary" type="submit">Submit</button>
 </form>

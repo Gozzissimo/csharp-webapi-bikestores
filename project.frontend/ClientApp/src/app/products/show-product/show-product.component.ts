@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { concat, map, of } from 'rxjs';
 import { Product } from '../../dto/Product.interface';
 import { ProductService } from '../../services/product.service';
 
@@ -22,26 +22,22 @@ export class ShowProductComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-
-    //SUBSCRIBE PER RICHIAMARE L'ID DALL'URL
-    this._Activatedroute.paramMap.subscribe(params => {
-      this.productId = Number(params.get("productId"));
-    });
-
-    this.productService
-      .FindByIdAsync(this.productId)
-      .pipe(
-        map(
-          (res) => this.actualProduct = res)
-      )
-      .subscribe(
-        (response) => (this.responseReceived(response)))
+  GetDataByParam() {
+    concat(
+      this.productId = this._Activatedroute.snapshot.params["productId"],
+      of(this.productService
+        .FindByIdAsync(this.productId)
+        .subscribe(
+          (res) => {
+            this.actualProduct = res
+            this.isLoading = false
+          }
+        ))
+    )
   }
 
-  private responseReceived(res: Product) {
-    this.isLoading = false;
-    this.actualProduct = res;
+  ngOnInit(): void {
+    this.GetDataByParam()
   }
 
   //FUNZIONE DELETE

@@ -3,6 +3,7 @@ import { Brand } from '../../dto/Brand.interface';
 import { BrandService } from '../../services/brand.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { concat, of } from 'rxjs';
 
 @Component({
   selector: 'app-update-brand',
@@ -26,30 +27,31 @@ export class UpdateBrandComponent implements OnInit {
       brandName: [null]
     });
 
-  ngOnInit() {
-    
-    //FUNZIONE PER RICAVARE L'ID DALL'URL ATTUALE
-    this._Activatedroute.paramMap.subscribe(params => {
-      this.brandId = Number(params.get("brandId"));
-
-      //FINDBYID PER RICAVARE I DATI DELL'OGGETTO IN QUESTIONE
-      //DA RIPROPORRE IN PAGINA
-      this.brandService.FindByIdAsync(this.brandId)
-        .subscribe((response) => {
-          const { brandId, brandName } = response;
-          //BUILDER DEL FORM
-          this.brandForm.patchValue({
-            brandId,
-            brandName
-          });
-        });
-    })
+  GetDataByParam() {
+    concat(
+      this.brandId = this._Activatedroute.snapshot.params["brandId"],
+      of(this.brandService
+        .FindByIdAsync(this.brandId)
+        .subscribe(
+          (res) => {
+            const { brandId, brandName } = res;
+            this.brandForm.patchValue({
+              brandId,
+              brandName
+            });
+          }
+        ))
+    )
   }
 
+  ngOnInit() {
+    this.GetDataByParam()
+  }
+
+    //FUNZIONE PER AGGIORNARE L'OGGETTO
   loading: boolean = false;
   errorMessage!: string;
 
-  //FUNZIONE PER AGGIORNARE L'OGGETTO
   public UpdateAsync() {
 
     this.loading = true;
