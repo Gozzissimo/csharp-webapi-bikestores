@@ -26,6 +26,15 @@ export class CreateProductComponent implements OnInit {
       }
     ];
 
+  //BUILDER DEL FORM
+  productForm: FormGroup = this.formBuilder.group({
+    productName: [''],
+    modelYear: [''],
+    listPrice: [''],
+    brandId: this.brands,
+    categoryId: this.categories
+  })
+
   constructor(
     private productService: ProductService,
     private brandService: BrandService,
@@ -33,6 +42,7 @@ export class CreateProductComponent implements OnInit {
     public formBuilder: FormBuilder
   ) { }
 
+  //RECALL DEI DATI PER BRAND
   public GetBrands() {
     this.loading = true;
     this.errorMessage = "";
@@ -52,21 +62,8 @@ export class CreateProductComponent implements OnInit {
         })
   }
 
-  productForm!: FormGroup;
-
   ngOnInit() {
-
-    //RECALL DEI DATI PER BRAND
     this.GetBrands();
-
-    //BUILDER DEL FORM
-    this.productForm = this.formBuilder.group({
-      productName: [''],
-      modelYear: [''],
-      listPrice: [''],
-      brandId: this.brands,
-      categoryId: this.categories
-    })
   }
 
   //FUNZIONE PER CREARE L'OGGETTO

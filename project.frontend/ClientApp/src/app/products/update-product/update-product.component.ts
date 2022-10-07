@@ -15,18 +15,7 @@ import { BrandService } from '../../services/brand.service';
 
 export class UpdateProductComponent implements OnInit {
 
-  productId!: number;
-
-  productForm: FormGroup =
-    this.formBuilder.group({
-      productId: [null],
-      productName: [null],
-      brandName: [null],
-      categoryName: [null],
-      modelYear: [null],
-      listPrice: [null],
-    });
-
+  public productId!: number;
   public loading: boolean = false;
   public errorMessage!: string;
   public brands!: Brand[];
@@ -48,6 +37,19 @@ export class UpdateProductComponent implements OnInit {
     public formBuilder: FormBuilder,
   ) { }
 
+  //BUILDER DEL FORM
+  productForm: FormGroup =
+    this.formBuilder.group({
+      brandId: this.brands,
+      categoryId: this.categories,
+      productName: [null],
+      modelYear: [null],
+      listPrice: [null],
+      productId: this.productId
+    });
+
+
+  //RECALL DEI DATI PER BRAND
   public GetBrands() {
     this.loading = true;
     this.errorMessage = "";
@@ -55,7 +57,6 @@ export class UpdateProductComponent implements OnInit {
       .subscribe(
         (response) => {                           //next() callback
           this.brands = response;
-          console.log(this.brands);
         },
         (error) => {                              //error() callback
           console.error('Request failed with error')
@@ -67,6 +68,7 @@ export class UpdateProductComponent implements OnInit {
         })
   }
 
+  //RECALL DEI DATI USANDO IL PARAM URL
   GetDataByParam() {
     concat(
       this.productId = this._Activatedroute.snapshot.params["productId"],
@@ -74,14 +76,16 @@ export class UpdateProductComponent implements OnInit {
         .FindByIdAsync(this.productId)
         .subscribe(
           (res) => {
-            const { productId, productName, brandName, categoryName, modelYear, listPrice } = res;
+            const { productId, productName, brandName, categoryName, modelYear, listPrice, brandId, categoryId } = res;
             this.productForm.patchValue({
               productId,
               productName,
               brandName,
               categoryName,
               modelYear,
-              listPrice
+              listPrice,
+              brandId,
+              categoryId
             });
           }
         ))
@@ -89,10 +93,7 @@ export class UpdateProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    //RECALL DEI DATI PER BRAND
     this.GetBrands();
-
-    //RECALL DEI DATI USANDO IL PARAM
     this.GetDataByParam()
   }
 

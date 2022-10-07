@@ -73,7 +73,7 @@ namespace project.webapi.Controllers
         [HttpPut]
         public async Task<ActionResult<ProductDTO>> Update(ProductDTO Product)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || Product.ProductId == 0)
             {
                 return BadRequest();
             }
