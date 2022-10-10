@@ -1,0 +1,11 @@
+<h1 class="heading"><strong>HTTP </strong>Create New Brand</h1>
+
+<form [formGroup]="categoryForm" (ngSubmit)="CreateAsync()">
+  <mat-form-field appearance="legacy">
+    <mat-label>Category Name</mat-label>
+    <input required matInput type="text" formControlName="categoryName">
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </div>
+</form>

@@ -1,34 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { concat, of } from 'rxjs';
-import { Brand } from '../../dto/Brand.interface';
-import { BrandService } from '../../services/brand.service';
+import { Category } from '../../dto/Category.interface';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
-  selector: 'app-show-brand',
-  templateUrl: './show-brand.component.html',
-  styleUrls: ['./show-brand.component.css']
+  selector: 'app-show-category',
+  templateUrl: './show-category.component.html',
+  styleUrls: ['./show-category.component.css']
 })
-export class ShowBrandComponent implements OnInit {
-  brandId!: number;
-  actualBrand!: Brand;
+export class ShowCategoryComponent implements OnInit {
+
+  categoryId!: number;
+  actualCategory!: Category;
   isLoading: boolean = true;
   id: number = 0;
 
   constructor(
     private _Activatedroute: ActivatedRoute,
-    private brandService: BrandService,
+    private categoryService: CategoryService,
     private router: Router
   ) { }
 
   GetDataByParam() {
     concat(
-      this.brandId = this._Activatedroute.snapshot.params["brandId"],
-      of(this.brandService
-        .FindByIdAsync(this.brandId)
+      this.categoryId = this._Activatedroute.snapshot.params["categoryId"],
+      of(this.categoryService
+        .FindByIdAsync(this.categoryId)
         .subscribe(
           (res) => {
-            this.actualBrand = res
+            this.actualCategory = res
             this.isLoading = false
           }
         ))
@@ -47,10 +48,10 @@ export class ShowBrandComponent implements OnInit {
     this.loading = true;
     this.errorMessage = "";
     if (confirm("Are you sure do you want to delete this Brand?")) {
-      this.brandService.DeleteAsync(id)
+      this.categoryService.DeleteAsync(id)
         .subscribe(
           (response) => {                           //next() callback
-            this.router.navigate(['/brands']);
+            this.router.navigate(['/categories']);
           },
           (error) => {                              //error() callback
             console.error('Request failed with error')

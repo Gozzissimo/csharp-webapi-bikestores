@@ -1,0 +1,11 @@
+<h1 class="heading"><strong>HTTP </strong>Update Category</h1>
+
+<form [formGroup]="categoryForm" (ngSubmit)="UpdateAsync()">
+  <div>
+    <mat-form-field>
+      <mat-label>Category Name</mat-label>
+      <input matInput required type="text" formControlName="categoryName">
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>

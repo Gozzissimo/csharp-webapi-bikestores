@@ -5,6 +5,8 @@ import { Product } from '../../dto/Product.interface';
 import { ProductService } from '../../services/product.service';
 import { BrandService } from '../../services/brand.service';
 import { Brand } from '../../dto/Brand.interface';
+import { Category } from '../../dto/Category.interface';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-create-product',
@@ -16,15 +18,7 @@ export class CreateProductComponent implements OnInit {
   public loading: boolean = false;
   public errorMessage!: string;
   public brands!: Brand[];
-  public categories: any[] =
-    [
-      {
-        "categoryId": 1, "categoryName": "Children Bicycles"
-      },
-      {
-        "categoryId": 2, "categoryName": "Comfort Bicycles"
-      }
-    ];
+  public categories!: Category[];
 
   //BUILDER DEL FORM
   productForm: FormGroup = this.formBuilder.group({
@@ -38,6 +32,7 @@ export class CreateProductComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private brandService: BrandService,
+    private categoryService: CategoryService,
     private router: Router,
     public formBuilder: FormBuilder
   ) { }
@@ -50,7 +45,25 @@ export class CreateProductComponent implements OnInit {
       .subscribe(
         (response) => {                           //next() callback
           this.brands = response;
-          console.log(this.brands);
+        },
+        (error) => {                              //error() callback
+          console.error('Request failed with error')
+          this.errorMessage = error;
+          this.loading = false;
+        },
+        () => {                                   //complete() callback
+          this.loading = false;
+        })
+  }
+
+  //RECALL DEI DATI PER BRAND
+  public GetCategories() {
+    this.loading = true;
+    this.errorMessage = "";
+    this.categoryService.GetAsync()
+      .subscribe(
+        (response) => {                           //next() callback
+          this.categories = response;
         },
         (error) => {                              //error() callback
           console.error('Request failed with error')
@@ -64,6 +77,7 @@ export class CreateProductComponent implements OnInit {
 
   ngOnInit() {
     this.GetBrands();
+    this.GetCategories();
   }
 
   //FUNZIONE PER CREARE L'OGGETTO

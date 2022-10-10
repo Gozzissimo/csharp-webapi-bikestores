@@ -11,7 +11,10 @@ import { IApiService } from '../dto/IApiService.interface';
 
 export class ProductService implements IApiService<Product> {
 
-  constructor(private http: HttpClient, private conf: ConfigService) { }
+  constructor(
+    private http: HttpClient,
+    private conf: ConfigService
+  ) { }
 
     GetAsync(): Observable<Product[]> {
       return this.http.get<Product[]>(`${this.conf.GetValue("urlApi")}/product`);

@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { concat, of } from 'rxjs';
 import { Brand } from '../../dto/Brand.interface';
 import { BrandService } from '../../services/brand.service';
+import { Category } from '../../dto/Category.interface';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-update-product',
@@ -19,19 +21,12 @@ export class UpdateProductComponent implements OnInit {
   public loading: boolean = false;
   public errorMessage!: string;
   public brands!: Brand[];
-  public categories: any[] =
-    [
-      {
-        "categoryId": 1, "categoryName": "Children Bicycles"
-      },
-      {
-        "categoryId": 2, "categoryName": "Comfort Bicycles"
-      }
-    ];
+  public categories!: Category[];
 
   constructor(
     private productService: ProductService,
     private brandService: BrandService,
+    private categoryService: CategoryService,
     private _Activatedroute: ActivatedRoute,
     private router: Router,
     public formBuilder: FormBuilder,
@@ -57,6 +52,23 @@ export class UpdateProductComponent implements OnInit {
       .subscribe(
         (response) => {                           //next() callback
           this.brands = response;
+        },
+        (error) => {                              //error() callback
+          console.error('Request failed with error')
+          this.errorMessage = error;
+          this.loading = false;
+        },
+        () => {                                   //complete() callback
+          this.loading = false;
+        })
+  }
+  public GetCategories() {
+    this.loading = true;
+    this.errorMessage = "";
+    this.categoryService.GetAsync()
+      .subscribe(
+        (response) => {                           //next() callback
+          this.categories = response;
         },
         (error) => {                              //error() callback
           console.error('Request failed with error')
@@ -94,6 +106,7 @@ export class UpdateProductComponent implements OnInit {
 
   ngOnInit() {
     this.GetBrands();
+    this.GetCategories();
     this.GetDataByParam()
   }
 

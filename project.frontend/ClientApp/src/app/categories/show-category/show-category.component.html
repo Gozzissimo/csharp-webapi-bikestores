@@ -1,0 +1,8 @@
+<div *ngIf="isLoading">
+  <h1>Loading data...</h1>
+</div>
+
+<div *ngIf="!isLoading">
+  <h1>{{actualCategory.categoryName}}</h1>
+  <button mat-raised-button color="warn" class="button" type="button" (click)="DeleteAsync(categoryId)">Delete</button>
+</div>
