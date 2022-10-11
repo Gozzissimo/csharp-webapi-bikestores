@@ -256,7 +256,7 @@ namespace project.data
                     .HasConstraintName("FK__staffs__manager___5535A963");
 
                 entity.HasOne(d => d.Store)
-                    .WithMany(p => p.staff)
+                    .WithMany(p => p.Staff)
                     .HasForeignKey(d => d.StoreId)
                     .HasConstraintName("FK__staffs__store_id__5441852A");
             });

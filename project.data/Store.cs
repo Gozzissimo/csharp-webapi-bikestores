@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace project.data
+﻿namespace project.data
 {
     public partial class Store
     {
@@ -9,7 +6,7 @@ namespace project.data
         {
             Orders = new HashSet<Order>();
             Stocks = new HashSet<Stock>();
-            staff = new HashSet<Staff>();
+            Staff = new HashSet<Staff>();
         }
 
         public int StoreId { get; set; }
@@ -23,6 +20,6 @@ namespace project.data
 
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Stock> Stocks { get; set; }
-        public virtual ICollection<Staff> staff { get; set; }
+        public virtual ICollection<Staff> Staff { get; set; }
     }
 }
