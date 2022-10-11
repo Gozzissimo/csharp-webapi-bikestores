@@ -1,0 +1,75 @@
+<h1 class="heading"><strong>HTTP </strong> Order Items</h1>
+<div>
+  <button mat-raised-button color="primary" class="button" [routerLink]="['new']">Create new Order Item</button>
+</div>
+
+<div *ngIf="loading">loading...</div>
+
+<div *ngIf="errorMessage" class="alert alert-warning">
+  <strong>Warning!</strong> {{errorMessage | json}}
+</div>
+
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Write Here" #input>
+</mat-form-field>
+
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <ng-container matColumnDef="orderId">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Order Id </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.orderId}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="itemId">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Item Id </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.itemId}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="productId">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Product Id </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.productId}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="productName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="quantity">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="listPrice">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> List Price </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.listPrice}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="discount">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Discount </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.discount}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" type="button" [routerLink]="['show',element.orderItemId]">Show</button>
+      <button mat-raised-button color="accent" type="button" [routerLink]="['edit',element.orderItemId]">Edit</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns"
+           (click)="onRowClicked(row)">
+  </mat-row>
+
+  <!-- Row shown when there is no matching data. -->
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+  </tr>
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="pageSizeOptions">
+</mat-paginator>

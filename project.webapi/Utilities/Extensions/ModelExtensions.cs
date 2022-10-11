@@ -395,11 +395,13 @@ namespace project.webapi.Utilities.Extensions
                 OrderId = OrderItem.OrderId,
                 ProductId = OrderItem.ProductId,
                 ItemId = OrderItem.ItemId,
+                ProductName = (OrderItem.Product == null) ? null : OrderItem.Product.ProductName,
                 ListPrice = OrderItem.ListPrice,
                 Discount = OrderItem.Discount,
                 Quantity = OrderItem.Quantity,
             };
         }
+
         public static List<OrderItemDTO> ToModelDTO(this List<OrderItem>? OrderItem)
         {
             List<OrderItemDTO> List = new List<OrderItemDTO>();

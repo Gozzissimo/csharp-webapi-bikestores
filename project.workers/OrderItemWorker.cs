@@ -41,13 +41,18 @@ namespace project.workers
         #region Async
         public async Task<List<OrderItem>> GetAsync()
         {
-            return await _context.OrderItems.ToListAsync();
+            return await _context.OrderItems
+                .Include(e => e.Product)
+                .ToListAsync();
         }
 
         public async Task<OrderItem> CreateAsync(OrderItem OrderItem)
         {
             _context.OrderItems.Add(OrderItem);
             await _context.SaveChangesAsync();
+            OrderItem = await _context.OrderItems
+                .Include(e => e.Product)
+                .FirstOrDefaultAsync(e => e.ProductId == OrderItem.ProductId);
             return OrderItem;
         }
 
@@ -72,9 +77,14 @@ namespace project.workers
             return await _context.OrderItems.FindAsync(orderItem.OrderId, orderItem.ItemId);
         }
 
-        public async Task<OrderItem> FindByIdAsync(int orderId, int storeId)
+        public async Task<OrderItem> FindByIdAsync(int orderId, int itemId)
         {
-            return await _context.OrderItems.FindAsync(orderId, storeId);
+            return await _context.OrderItems.FindAsync(orderId, itemId);
+
+            var orderItem = await _context.OrderItems
+                .Include(e => e.Product)
+                .FirstOrDefaultAsync(e => e.OrderId == orderId && e.ItemId == itemId);
+            return orderItem;
         }
         #endregion
 
