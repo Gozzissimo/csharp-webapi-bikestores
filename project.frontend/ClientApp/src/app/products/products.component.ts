@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ProductsComponent implements OnInit {
 
-  private title = 'Product';
+  private title = 'Products';
   public products!: Product[];
   public filterText: string = '';
   public loading: boolean = false;
@@ -78,5 +78,4 @@ export class ProductsComponent implements OnInit {
   onRowClicked(row: any) {
     console.log('Row clicked: ', row);
   }
-
 }

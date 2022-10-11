@@ -62,6 +62,8 @@ export class UpdateProductComponent implements OnInit {
           this.loading = false;
         })
   }
+
+  //RECALL DEI DATI PER CATEGORY
   public GetCategories() {
     this.loading = true;
     this.errorMessage = "";

@@ -31,6 +31,28 @@ import { UpdateCategoryComponent } from './categories/update-category/update-cat
 import { ShowCategoryComponent } from './categories/show-category/show-category.component';
 import { DeleteCategoryComponent } from './categories/delete-category/delete-category.component';
 
+//ORDER-ITEMS
+import { OrderItemsComponent } from './order-items/order-items.component';
+import { CreateOrderItemComponent } from './order-items/create-order-item/create-order-item.component';
+import { UpdateOrderItemComponent } from './order-items/update-order-item/update-order-item.component';
+import { DeleteOrderItemComponent } from './order-items/delete-order-item/delete-order-item.component';
+import { ShowOrderItemComponent } from './order-items/show-order-item/show-order-item.component';
+
+//ORDERS
+import { OrdersComponent } from './orders/orders.component';
+import { CreateOrderComponent } from './orders/create-order/create-order.component';
+import { UpdateOrderComponent } from './orders/update-order/update-order.component';
+import { DeleteOrderComponent } from './orders/delete-order/delete-order.component';
+import { ShowOrderComponent } from './orders/show-order/show-order.component';
+
+//CUSTOMERS
+import { CustomersComponent } from './customers/customers.component';
+import { CreateCustomerComponent } from './customers/create-customer/create-customer.component';
+import { UpdateCustomerComponent } from './customers/update-customer/update-customer.component';
+import { DeleteCustomerComponent } from './customers/delete-customer/delete-customer.component';
+import { ShowCustomerComponent } from './customers/show-customer/show-customer.component';
+
+
 //MATERIAL UI
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -48,8 +70,9 @@ import { ConfigService } from './services/config.service';
 import { BrandService } from './services/brand.service';
 import { ProductService } from './services/product.service';
 import { CategoryService } from './services/category.service';
-import { StoreModule } from '@ngrx/store';
-
+import { OrderItemService } from './services/order-item.service';
+import { OrderService } from './services/order.service';
+import { CustomerService } from './services/customer.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +95,22 @@ import { StoreModule } from '@ngrx/store';
     CreateCategoryComponent,
     UpdateCategoryComponent,
     ShowCategoryComponent,
-    DeleteCategoryComponent
+    DeleteCategoryComponent,
+    OrderItemsComponent,
+    CreateOrderItemComponent,
+    UpdateOrderItemComponent,
+    DeleteOrderItemComponent,
+    ShowOrderItemComponent,
+    OrdersComponent,
+    CreateOrderComponent,
+    UpdateOrderComponent,
+    DeleteOrderComponent,
+    ShowOrderComponent,
+    CustomersComponent,
+    CreateCustomerComponent,
+    UpdateCustomerComponent,
+    DeleteCustomerComponent,
+    ShowCustomerComponent
   ],
 
   imports: [
@@ -103,6 +141,20 @@ import { StoreModule } from '@ngrx/store';
       { path: 'categories/show/:categoryId', component: ShowCategoryComponent },
       { path: 'categories/edit/:categoryId', component: UpdateCategoryComponent },
       { path: 'categories/delete/:categoryId', component: DeleteCategoryComponent },
+
+      //ORDER-ITEMS
+      { path: 'order-items', component: OrderItemsComponent },
+      { path: 'order-items/new', component: CreateOrderItemComponent },
+      { path: 'order-items/show/:orderItemsId', component: ShowOrderItemComponent },
+      { path: 'order-items/edit/:orderItemsId', component: UpdateOrderItemComponent },
+      { path: 'order-items/delete/:orderItemsId', component: DeleteOrderItemComponent },
+
+      //ORDERs
+      { path: 'orders', component: OrdersComponent },
+      { path: 'orders/new', component: CreateOrderItemComponent },
+      { path: 'orders/show/:orderItemsId', component: ShowOrderComponent },
+      { path: 'orders/edit/:orderItemsId', component: UpdateOrderComponent },
+      { path: 'orders/delete/:orderItemsId', component: DeleteOrderComponent },
     ]),
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -113,8 +165,7 @@ import { StoreModule } from '@ngrx/store';
     MatProgressBarModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatSelectModule,
-    StoreModule.forRoot({}, {})
+    MatSelectModule
   ],
   providers: [{
     provide: APP_INITIALIZER,
@@ -127,7 +178,10 @@ import { StoreModule } from '@ngrx/store';
   },
     BrandService,
     ProductService,
-    CategoryService
+    CategoryService,
+    OrderItemService,
+    OrderService,
+    CustomerService
   ],
 
   bootstrap: [AppComponent]
