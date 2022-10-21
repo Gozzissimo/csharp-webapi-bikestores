@@ -64,8 +64,10 @@ export class OrdersComponent implements OnInit {
     'requiredDate',
     'shippedDate',
     'storeName',
-    'staffId'
-    ];
+    'staffName',
+    'actions'
+  ];
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

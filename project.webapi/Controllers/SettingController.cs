@@ -48,6 +48,11 @@ namespace project.webapi.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<ActionResult<SettingDTO>> Create(SettingDTO Setting)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var data = await _worker.CreateAsync(Setting.ToModelDB());
 
             if (data == null)

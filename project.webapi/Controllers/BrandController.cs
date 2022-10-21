@@ -48,6 +48,10 @@ namespace project.webapi.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<ActionResult<BrandDTO>> Create(BrandDTO Brand)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             var data = await _worker.CreateAsync(Brand.ToModelDB());
 
             if (data == null)

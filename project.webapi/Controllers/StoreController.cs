@@ -47,6 +47,11 @@ namespace project.webapi.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<ActionResult<StoreDTO>> Create(StoreDTO Store)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var data = await _worker.CreateAsync(Store.ToModelDB());
 
             if (data == null)

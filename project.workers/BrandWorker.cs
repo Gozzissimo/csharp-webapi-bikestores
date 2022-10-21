@@ -46,6 +46,7 @@ namespace project.workers
 
         public async Task<Brand> CreateAsync(Brand brand)
         {
+            //QUA INSERISCO IL CAST DEL VALIDATE WORKER VOID
             _context.Brands.Add(brand);
             await _context.SaveChangesAsync();
             return brand;

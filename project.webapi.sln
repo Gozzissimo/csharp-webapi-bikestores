@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "project.dtos", "project.dto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "project.frontend", "project.frontend\project.frontend.csproj", "{2AA13B9C-7F97-441B-B396-834FF67B81DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "project.test", "project.test\project.test.csproj", "{D04A577A-D2E6-4A7F-9F67-50505B6B6A13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "project.test", "project.test\project.test.csproj", "{D04A577A-D2E6-4A7F-9F67-50505B6B6A13}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E4379CE-54AB-4B5A-9FB0-489DD1F992A3}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

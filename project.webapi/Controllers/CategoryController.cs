@@ -47,6 +47,11 @@ namespace project.webapi.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<ActionResult<CategoryDTO>> Create(CategoryDTO Category)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var data = await _worker.CreateAsync(Category.ToModelDB());
 
             if (data == null)

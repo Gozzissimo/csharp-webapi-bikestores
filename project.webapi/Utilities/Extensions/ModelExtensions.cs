@@ -151,7 +151,11 @@ namespace project.webapi.Utilities.Extensions
                 RequiredDate = Order.RequiredDate,
                 ShippedDate = Order.ShippedDate,
                 StoreId = Order.StoreId,
-                StaffId = Order.StaffId
+                StaffId = Order.StaffId,
+                Customer = Order.Customer.ToModelDTO(),
+                CustomerName = $"{Order.Customer.FirstName} {Order.Customer.LastName}",
+                StaffName = $"{Order.Staff.FirstName} {Order.Staff.LastName}",
+                StoreName = Order.Store.StoreName
             };
         }
         public static List<OrderDTO> ToModelDTO(this List<Order>? Order)

@@ -41,7 +41,11 @@ namespace project.workers
         #region Async
         public async Task<List<Order>> GetAsync()
         {
-            return await _context.Orders.ToListAsync();
+            return await _context.Orders
+                .Include(e => e.Customer)
+                .Include(e => e.Staff)
+                .Include(e => e.Store)
+                .ToListAsync();
         }
 
         public async Task<Order> CreateAsync(Order Order)

@@ -8,4 +8,5 @@ export interface Customer {
   city: string;
   state: string;
   zipCode: string;
+  customerName: string;
 }

@@ -10,5 +10,9 @@
         public DateTime? ShippedDate { get; set; }
         public int StoreId { get; set; }
         public int StaffId { get; set; }
+        public string? CustomerName { get; set; }
+        public CustomerDTO? Customer { get; set; }
+        public string? StaffName { get; set; }
+        public string? StoreName { get; set; }
     }
 }

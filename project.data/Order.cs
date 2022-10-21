@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace project.data
+﻿namespace project.data
 {
     public partial class Order
     {
