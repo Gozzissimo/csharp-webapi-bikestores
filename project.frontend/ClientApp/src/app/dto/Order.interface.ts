@@ -7,6 +7,6 @@ export interface Order {
   requiredDate: Date;
   shippedDate: Date;
   storeId: number;
-  staffID: number;
+  staffId: number;
   staffName: string;
 }

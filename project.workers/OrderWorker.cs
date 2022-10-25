@@ -50,8 +50,13 @@ namespace project.workers
 
         public async Task<Order> CreateAsync(Order Order)
         {
-            _context.Orders.Add(Order);
+            await _context.Orders.AddAsync(Order);
             await _context.SaveChangesAsync();
+            Order = await _context.Orders
+                .Include(e => e.Customer)
+                .Include(e => e.Staff)
+                .Include(e => e.Store)
+                .FirstOrDefaultAsync(e => e.OrderId == Order.OrderId);
             return Order;
         }
 

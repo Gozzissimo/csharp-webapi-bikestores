@@ -1,1 +1,113 @@
-<p>create-order works!</p>
+<h1 class="heading"><strong>HTTP </strong>Create New Order</h1>
+
+<form [formGroup]="orderForm" (ngSubmit)="CreateAsync()">
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Customer Name</mat-label>
+      <input type="text"
+             placeholder="Choose your Customer"
+             matInput
+             formControlName="customerName"
+             required
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let order of filteredOrders" [value]="order.customerId">
+          {{order.customerName}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Order Status</mat-label>
+      <input required matInput type="number"
+             formControlName="orderStatus"
+             placeholder="Possible Status: 1,2,3,4">
+    </mat-form-field>
+  </div>
+
+  <!--<div>
+    <input type="date"
+           formControlName="orderDate"
+           required>
+  </div>
+
+  <div>
+    <input type="date"
+           formControlName="requiredDate"
+           required>
+  </div>
+
+  <div>
+    <input type="date"
+           formControlName="shippedDate"
+           required>
+  </div>-->
+
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Order Date</mat-label>
+      <input matInput
+             [matDatepicker]="orderDatePicker"
+             [matDatepickerFilter]="DateFilter"
+             (click)="orderDatePicker.open()"
+             formControlName="orderDate"
+             required>
+      <mat-hint>dd/mm/yyyy</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="orderDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #orderDatePicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Required Date</mat-label>
+      <input matInput
+             [matDatepicker]="requiredDatePicker"
+             [matDatepickerFilter]="DateFilter"
+             (click)="requiredDatePicker.open()"
+             formControlName="requiredDate"
+             required>
+      <mat-hint>dd/mm/yyyy</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="requiredDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #requiredDatePicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Shipped Date</mat-label>
+      <input matInput [matDatepicker]="shippedDatePicker"
+             [matDatepickerFilter]="DateFilter"
+             (click)="shippedDatePicker.open()"
+             formControlName="shippedDate">
+      <mat-hint>dd/mm/yyyy</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="shippedDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #shippedDatePicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Store Id</mat-label>
+      <mat-select required formControlName="storeId" name="store">
+        <mat-option *ngFor="let store of stores" [value]="store.storeId">{{ store.storeId }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Staff Id</mat-label>
+      <mat-select required formControlName="staffId" name="staff">
+        <mat-option *ngFor="let staff of staffs" [value]="staff.staffId">{{ staff.staffId }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </div>
+</form>

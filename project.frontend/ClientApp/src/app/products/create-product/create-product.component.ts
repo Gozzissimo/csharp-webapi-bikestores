@@ -22,11 +22,11 @@ export class CreateProductComponent implements OnInit {
 
   //BUILDER DEL FORM
   productForm: FormGroup = this.formBuilder.group({
-    productName: [''],
-    modelYear: [''],
-    listPrice: [''],
-    brandId: this.brands,
-    categoryId: this.categories
+    productName: [null],
+    modelYear: [null],
+    listPrice: [null],
+    brandId: [null],
+    categoryId: [null]
   })
 
   constructor(

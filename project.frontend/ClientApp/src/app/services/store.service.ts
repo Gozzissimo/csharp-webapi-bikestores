@@ -1,37 +1,37 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Customer } from '../dto/Customer.interface';
 import { IApiService } from '../dto/IApiService.interface';
+import { Store } from '../dto/Store.interface';
 import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StoreService implements IApiService<Customer> {
+export class StoreService implements IApiService<Store> {
 
   constructor(
     private http: HttpClient,
     private conf: ConfigService
   ) { }
 
-  GetAsync(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(`${this.conf.GetValue("urlApi")}/customer`);
+  GetAsync(): Observable<Store[]> {
+    return this.http.get<Store[]>(`${this.conf.GetValue("urlApi")}/store`);
   }
 
-  FindByIdAsync(id: number): Observable<Customer> {
-    return this.http.get<Customer>(`${this.conf.GetValue("urlApi")}/customer/${id}`);
+  FindByIdAsync(id: number): Observable<Store> {
+    return this.http.get<Store>(`${this.conf.GetValue("urlApi")}/store/${id}`);
   }
 
-  CreateAsync(element: Customer): Observable<Customer> {
-    return this.http.post<Customer>(`${this.conf.GetValue("urlApi")}/customer`, element);
+  CreateAsync(element: Store): Observable<Store> {
+    return this.http.post<Store>(`${this.conf.GetValue("urlApi")}/store`, element);
   }
 
-  UpdateAsync(element: Customer): Observable<Customer> {
-    return this.http.put<Customer>(`${this.conf.GetValue("urlApi")}/customer`, element);
+  UpdateAsync(element: Store): Observable<Store> {
+    return this.http.put<Store>(`${this.conf.GetValue("urlApi")}/store`, element);
   }
 
-  DeleteAsync(id: number): Observable<Customer> {
-    return this.http.delete<Customer>(`${this.conf.GetValue("urlApi")}/customer/${id}`);
+  DeleteAsync(id: number): Observable<Store> {
+    return this.http.delete<Store>(`${this.conf.GetValue("urlApi")}/store/${id}`);
   }
 }

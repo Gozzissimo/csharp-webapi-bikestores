@@ -63,6 +63,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 //SERVICES
 import { APP_INITIALIZER } from '@angular/core';
@@ -73,6 +75,7 @@ import { CategoryService } from './services/category.service';
 import { OrderItemService } from './services/order-item.service';
 import { OrderService } from './services/order.service';
 import { CustomerService } from './services/customer.service';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -149,12 +152,12 @@ import { CustomerService } from './services/customer.service';
       { path: 'order-items/edit/:orderItemsId', component: UpdateOrderItemComponent },
       { path: 'order-items/delete/:orderItemsId', component: DeleteOrderItemComponent },
 
-      //ORDERs
+      //ORDERS
       { path: 'orders', component: OrdersComponent },
-      { path: 'orders/new', component: CreateOrderItemComponent },
-      { path: 'orders/show/:orderItemsId', component: ShowOrderComponent },
-      { path: 'orders/edit/:orderItemsId', component: UpdateOrderComponent },
-      { path: 'orders/delete/:orderItemsId', component: DeleteOrderComponent },
+      { path: 'orders/new', component: CreateOrderComponent },
+      { path: 'orders/show/:orderId', component: ShowOrderComponent },
+      { path: 'orders/edit/:orderId', component: UpdateOrderComponent },
+      { path: 'orders/delete/:orderId', component: DeleteOrderComponent },
     ]),
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -165,7 +168,10 @@ import { CustomerService } from './services/customer.service';
     MatProgressBarModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   providers: [{
     provide: APP_INITIALIZER,
@@ -181,7 +187,8 @@ import { CustomerService } from './services/customer.service';
     CategoryService,
     OrderItemService,
     OrderService,
-    CustomerService
+    CustomerService,
+    MatNativeDateModule,
   ],
 
   bootstrap: [AppComponent]

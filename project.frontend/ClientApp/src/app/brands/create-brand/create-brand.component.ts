@@ -23,7 +23,7 @@ export class CreateBrandComponent implements OnInit {
   ngOnInit() {
     //BUILDER DEL FORM
     this.brandForm = this.formBuilder.group({
-      brandName: ['']
+      brandName: [null]
     })
   }
 

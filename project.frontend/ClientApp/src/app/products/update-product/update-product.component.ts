@@ -33,15 +33,14 @@ export class UpdateProductComponent implements OnInit {
   ) { }
 
   //BUILDER DEL FORM
-  productForm: FormGroup =
-    this.formBuilder.group({
-      brandId: this.brands,
-      categoryId: this.categories,
-      productName: [null],
-      modelYear: [null],
-      listPrice: [null],
-      productId: this.productId
-    });
+  productForm: FormGroup = this.formBuilder.group({
+    brandId: [null],
+    categoryId: [null],
+    productName: [null],
+    modelYear: [null],
+    listPrice: [null],
+    productId: [null]
+  });
 
 
   //RECALL DEI DATI PER BRAND
