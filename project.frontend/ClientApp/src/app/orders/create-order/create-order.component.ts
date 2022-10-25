@@ -30,7 +30,7 @@ export class CreateOrderComponent implements OnInit {
 
   //BUILDER DEL FORM
   orderForm: FormGroup = this.formBuilder.group({
-    customerName: [null],
+    customerId: [null],
     orderStatus: [null], //qua dovrei inserire un'elenco di status
     orderDate: [null],
     requiredDate: [null],
