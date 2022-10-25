@@ -6,7 +6,6 @@ import { Customer } from '../../dto/Customer.interface';
 import { Order } from '../../dto/Order.interface';
 import { Staff } from '../../dto/Staff.interface';
 import { Store } from '../../dto/Store.interface';
-import { CustomerService } from '../../services/customer.service';
 import { OrderService } from '../../services/order.service';
 import { StaffService } from '../../services/staff.service';
 import { StoreService } from '../../services/store.service';
@@ -20,7 +19,6 @@ export class CreateOrderComponent implements OnInit {
 
   public loading: boolean = false;
   public errorMessage!: string;
-  public customers!: Customer[];
   public staffs!: Staff[];
   public stores!: Store[];
   public orders!: Order[];
@@ -41,31 +39,11 @@ export class CreateOrderComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
-    private customerService: CustomerService,
     private storeService: StoreService,
     private staffService: StaffService,
     private router: Router,
     public formBuilder: FormBuilder
   ) { }
-
-  //RECALL DEI DATI PER CUSTOMER
-  public GetCustomers() {
-    this.loading = true;
-    this.errorMessage = "";
-    this.customerService.GetAsync()
-      .subscribe(
-        (response) => {                           //next() callback
-          this.customers = response;
-        },
-        (error) => {                              //error() callback
-          console.error('Request failed with error')
-          this.errorMessage = error;
-          this.loading = false;
-        },
-        () => {                                   //complete() callback
-          this.loading = false;
-        })
-  }
 
   //RECALL DEI DATI PER STORE
   public GetStores() {
@@ -125,6 +103,7 @@ export class CreateOrderComponent implements OnInit {
         })
   }
 
+  //FILTRO CLIENTI
   FilterCustomer(enteredData: string) {
     this.filteredOrders = this.orders.filter(order => {
       return order.customerName
@@ -133,6 +112,8 @@ export class CreateOrderComponent implements OnInit {
         .indexOf(enteredData) === 0; 
     })
   }
+
+  //FUNZIONE CHE INIZIALIZZA IL FILTRO CLIENTI
   FormInit() {
     this.orderForm.get('customerName')?.valueChanges
       .subscribe(response => {
@@ -140,6 +121,7 @@ export class CreateOrderComponent implements OnInit {
     })
   }
 
+  //FILTRO DATA CHE RESTITUISCE SOLO FERIALI
   DateFilter: (date: Date | null) => boolean =
     (date: Date | null) => {
       if (!date) {
@@ -150,7 +132,6 @@ export class CreateOrderComponent implements OnInit {
     };
 
   ngOnInit() {
-    this.GetCustomers();
     this.GetStores();
     this.GetStaffs();
     this.GetOrders();

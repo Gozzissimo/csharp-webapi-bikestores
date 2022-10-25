@@ -59,8 +59,8 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button mat-raised-button color="primary" type="button" [routerLink]="['show',element.productId]">Show</button>
-      <button mat-raised-button color="accent" type="button" [routerLink]="['edit',element.productId]">Edit</button>
+      <button mat-raised-button color="primary" type="button" [routerLink]="['show',element.orderId]">Show</button>
+      <button mat-raised-button color="accent" type="button" [routerLink]="['edit',element.orderId]">Edit</button>
     </mat-cell>
   </ng-container>
 

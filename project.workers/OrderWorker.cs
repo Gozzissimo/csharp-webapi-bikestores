@@ -78,7 +78,14 @@ namespace project.workers
 
         public async Task<Order> FindByIdAsync(int id)
         {
-            return await _context.Orders.FindAsync(id);
+            //return await _context.Orders.FindAsync(id);
+
+            var order = await _context.Orders
+                .Include(e => e.Staff)
+                .Include(e => e.Customer)
+                .Include(e => e.Store)
+                .FirstOrDefaultAsync(e => e.OrderId == id);
+            return order;
         }
 
         public Task<Order> DeleteAsync(Order element)

@@ -89,9 +89,16 @@ export class UpdateProductComponent implements OnInit {
         .FindByIdAsync(this.productId)
         .subscribe(
           (res) => {
-            const { productId, productName, brandName, categoryName, modelYear, listPrice, brandId, categoryId } = res;
+            const {
+              productName,
+              brandName,
+              categoryName,
+              modelYear,
+              listPrice,
+              brandId,
+              categoryId
+            } = res;
             this.productForm.patchValue({
-              productId,
               productName,
               brandName,
               categoryName,
