@@ -1,1 +1,57 @@
-<p>create-order-item works!</p>
+<h1 class="heading"><strong>HTTP </strong>Create New OrderItem</h1>
+
+<form [formGroup]="orderItemForm" (ngSubmit)="CreateAsync()">
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Order id</mat-label>
+      <mat-select required formControlName="orderId" name="orderId">
+        <mat-option *ngFor="let order of orders" [value]="order.orderId">{{ order.orderId }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Product Id</mat-label>
+      <input type="text"
+             placeholder="Choose your Product"
+             matInput
+             formControlName="productId"
+             required
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let product of filteredProducts" [value]="product.productId">
+          {{product.productName}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Quantity</mat-label>
+      <input required matInput type="number" min="1" step="1" formControlName="quantity">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Discount</mat-label>
+      <input required matInput type="number" step="any" formControlName="discount">
+      <mat-hint>Sconto in numero decimale</mat-hint>  
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>List Price</mat-label>
+      <input required matInput type="number" step="any" formControlName="listPrice">
+    </mat-form-field>
+  </div>
+
+
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </div>
+</form>

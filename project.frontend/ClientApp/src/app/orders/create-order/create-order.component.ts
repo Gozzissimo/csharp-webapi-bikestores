@@ -24,8 +24,6 @@ export class CreateOrderComponent implements OnInit {
   public orders!: Order[];
   public filteredOrders!: Order[];
 
-  //CUSTOMER CONTROL
-
   //BUILDER DEL FORM
   orderForm: FormGroup = this.formBuilder.group({
     customerId: [null],
@@ -115,7 +113,7 @@ export class CreateOrderComponent implements OnInit {
 
   //FUNZIONE CHE INIZIALIZZA IL FILTRO CLIENTI
   FormInit() {
-    this.orderForm.get('customerName')?.valueChanges
+    this.orderForm.get('customerId')?.valueChanges
       .subscribe(response => {
         this.FilterCustomer(response);
     })
@@ -159,5 +157,4 @@ export class CreateOrderComponent implements OnInit {
           this.loading = false;
         })
   }
-
 }

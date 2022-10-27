@@ -54,7 +54,7 @@ export class ShowOrderComponent implements OnInit {
       this.orderService.DeleteAsync(id)
         .subscribe(
           (response) => {                           //next() callback
-            this.router.navigate(['/products']);
+            this.router.navigate(['/orders']);
           },
           (error) => {                              //error() callback
             console.error('Request failed with error')
