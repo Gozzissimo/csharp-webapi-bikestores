@@ -18,7 +18,8 @@ namespace project.webapi.Utilities.Extensions
                 Phone = customer.Phone,
                 State = customer.State,
                 Street = customer.Street,
-                ZipCode = customer.ZipCode
+                ZipCode = customer.ZipCode,
+                CustomerName = $"{customer.FirstName} {customer.LastName}"
             };
         }
         public static List<CustomerDTO> ToModelDTO(this List<Customer>? Customer)

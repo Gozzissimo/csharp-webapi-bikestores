@@ -1,1 +1,80 @@
-<p>customers works!</p>
+<h1 class="heading"><strong>HTTP </strong>Products</h1>
+<div>
+  <button mat-raised-button color="primary" class="button" [routerLink]="['new']">Create new Product</button>
+</div>
+
+<div *ngIf="loading">loading...</div>
+
+<div *ngIf="errorMessage" class="alert alert-warning">
+  <strong>Warning!</strong> {{errorMessage | json}}
+</div>
+
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Write Here" #input>
+</mat-form-field>
+
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <ng-container matColumnDef="customerId">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.customerId}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="customerName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.customerName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="phone">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="street">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Street Address </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.street}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="city">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> City </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="state">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="zipCode">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Zip Code </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.zipCode}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" type="button" [routerLink]="['show',element.cusromerId]">Show</button>
+      <button mat-raised-button color="accent" type="button" [routerLink]="['edit',element.cusromerId]">Edit</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns"
+           (click)="onRowClicked(row)">
+  </mat-row>
+
+  <!-- Row shown when there is no matching data. -->
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+  </tr>
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="pageSizeOptions">
+</mat-paginator>
