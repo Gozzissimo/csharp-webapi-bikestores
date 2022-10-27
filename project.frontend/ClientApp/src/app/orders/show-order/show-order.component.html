@@ -1,1 +1,20 @@
-<p>show-order works!</p>
+<div *ngIf="isLoading">
+  <h1>Loading data...</h1>
+</div>
+
+<div *ngIf="!isLoading">
+  <h1>Ordine: #{{ actualOrder.orderId }}</h1>
+  <h2>Cliente: {{ actualOrder.customerName}}</h2>
+  <p>Status: {{ actualOrder.orderStatus}}</p>
+  <p>Data dell'ordine: {{ actualOrder.orderDate | date:'longDate'}} </p>
+  <p>Data di consegna richiesta: {{ actualOrder.requiredDate | date:'longDate'}};</p>
+  <p>Data di spedizione: {{ actualOrder.shippedDate | date:'longDate'}}</p>
+  <p>Data di spedizione: {{ actualOrder.shippedDate | date:'longDate'}}</p>
+  <button mat-raised-button color="warn" class="button" type="button" (click)="DeleteAsync(orderId)">Delete</button>
+</div>
+
+<div>
+  <h2>
+    Dettaglio Ordine
+  </h2>
+</div>
