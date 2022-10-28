@@ -52,6 +52,12 @@ import { UpdateCustomerComponent } from './customers/update-customer/update-cust
 import { DeleteCustomerComponent } from './customers/delete-customer/delete-customer.component';
 import { ShowCustomerComponent } from './customers/show-customer/show-customer.component';
 
+//STORES
+import { StoresComponent } from './stores/stores.component';
+import { CreateStoreComponent } from './stores/create-store/create-store.component';
+import { UpdateStoreComponent } from './stores/update-store/update-store.component';
+import { ShowStoreComponent } from './stores/show-store/show-store.component';
+import { DeleteStoreComponent } from './stores/delete-store/delete-store.component';
 
 //MATERIAL UI
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -76,6 +82,10 @@ import { OrderItemService } from './services/order-item.service';
 import { OrderService } from './services/order.service';
 import { CustomerService } from './services/customer.service';
 import { MatNativeDateModule } from '@angular/material/core';
+import { StoreService } from './services/store.service';
+import { StaffService } from './services/staff.service';
+import { StockService } from './services/stock.service';
+
 
 @NgModule({
   declarations: [
@@ -113,7 +123,12 @@ import { MatNativeDateModule } from '@angular/material/core';
     CreateCustomerComponent,
     UpdateCustomerComponent,
     DeleteCustomerComponent,
-    ShowCustomerComponent
+    ShowCustomerComponent,
+    StoresComponent,
+    CreateStoreComponent,
+    UpdateStoreComponent,
+    ShowStoreComponent,
+    DeleteStoreComponent
   ],
 
   imports: [
@@ -165,6 +180,13 @@ import { MatNativeDateModule } from '@angular/material/core';
       { path: 'customers/show/:customerId', component: ShowCustomerComponent },
       { path: 'customers/edit/:customerId', component: UpdateCustomerComponent },
       { path: 'customers/delete/:customerId', component: DeleteCustomerComponent },
+
+      //CUSTOMERS
+      { path: 'stores', component: StoresComponent },
+      { path: 'stores/new', component: CreateStoreComponent },
+      { path: 'stores/show/:storeId', component: ShowStoreComponent },
+      { path: 'stores/edit/:storeId', component: UpdateStoreComponent },
+      { path: 'stores/delete/:storeId', component: DeleteStoreComponent },
     ]),
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -194,7 +216,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     CategoryService,
     OrderItemService,
     OrderService,
+    StoreService,
     CustomerService,
+    StaffService,
+    StockService,
     MatNativeDateModule,
   ],
 

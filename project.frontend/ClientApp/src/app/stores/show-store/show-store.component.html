@@ -1,0 +1,14 @@
+<div *ngIf="isLoading">
+  <h1>Loading data...</h1>
+</div>
+
+<div *ngIf="!isLoading">
+  <h1>{{ actualStore.storeName }}</h1>
+  <p>Telefono: {{ actualStore.phone}}</p>
+  <p>Email: {{ actualStore.email }} </p>
+  <p>Indirizzo: {{ actualStore.street }}</p>
+  <p>Città: {{ actualStore.city }}</p>
+  <p>Nazione: {{ actualStore.state }}</p>
+  <p>CAP: {{ actualStore.zipCode }}</p>
+  <button mat-raised-button color="warn" class="button" type="button" (click)="DeleteAsync(storeId)">Delete</button>
+</div>

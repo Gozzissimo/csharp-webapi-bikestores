@@ -2,32 +2,32 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Customer } from '../dto/Customer.interface';
-import { CustomerService } from '../services/customer.service';
+import { Store } from '../dto/Store.interface';
+import { StoreService } from '../services/store.service';
 
 @Component({
-  selector: 'app-customers',
-  templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.css']
+  selector: 'app-stores',
+  templateUrl: './stores.component.html',
+  styleUrls: ['./stores.component.css']
 })
-export class CustomersComponent implements OnInit {
+export class StoresComponent implements OnInit {
 
-  public title = 'Customers';
-  public customers!: Customer[];
+  private title = 'Stores';
+  public stores!: Store[];
   public filterText: string = '';
   public loading: boolean = false;
   public errorMessage!: string;
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private storeService: StoreService) { }
 
   public GetAsync() {
     this.loading = true;
     this.errorMessage = "";
-    this.customerService.GetAsync()
+    this.storeService.GetAsync()
       .subscribe(
         (response) => {                           //next() callback
-          this.customers = response;
-          this.dataSource.data = this.customers;
+          this.stores = response;
+          this.dataSource.data = this.stores;
         },
         (error) => {                              //error() callback
           console.error('Request failed with error')
@@ -54,11 +54,11 @@ export class CustomersComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  dataSource = new MatTableDataSource<Customer>();
+  dataSource = new MatTableDataSource<Store>();
 
   displayedColumns = [
-    'customerId',
-    'customerName',
+    'storeId',
+    'storeName',
     'phone',
     'email',
     'street',

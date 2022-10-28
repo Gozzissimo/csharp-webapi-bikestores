@@ -1,24 +1,17 @@
-<h1 class="heading"><strong>HTTP </strong>Create New Customer</h1>
+<h1 class="heading"><strong>HTTP </strong>Update Store</h1>
 
-<form [formGroup]="customerForm" (ngSubmit)="CreateAsync()">
+<form [formGroup]="storeForm" (ngSubmit)="UpdateAsync()">
   <div>
     <mat-form-field appearance="legacy">
-      <mat-label>First Name</mat-label>
-      <input matInput required type="text" formControlName="firstName">
-    </mat-form-field>
-  </div>
-
-  <div>
-    <mat-form-field appearance="legacy">
-      <mat-label>Last Name</mat-label>
-      <input matInput required type="text" formControlName="lastName">
+      <mat-label>Store Name</mat-label>
+      <input matInput type="text" formControlName="storeName">
     </mat-form-field>
   </div>
 
   <div>
     <mat-form-field appearance="legacy">
       <mat-label>Phone</mat-label>
-      <input matInput type="tel" formControlName="phone">
+      <input required matInput type="tel" formControlName="phone">
     </mat-form-field>
   </div>
 
