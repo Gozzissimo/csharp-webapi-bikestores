@@ -162,9 +162,9 @@ import { MatNativeDateModule } from '@angular/material/core';
       //CUSTOMERS
       { path: 'customers', component: CustomersComponent },
       { path: 'customers/new', component: CreateCustomerComponent },
-      { path: 'customers/show/:orderId', component: ShowCustomerComponent },
-      { path: 'customers/edit/:orderId', component: UpdateCustomerComponent },
-      { path: 'customers/delete/:orderId', component: DeleteCustomerComponent },
+      { path: 'customers/show/:customerId', component: ShowCustomerComponent },
+      { path: 'customers/edit/:customerId', component: UpdateCustomerComponent },
+      { path: 'customers/delete/:customerId', component: DeleteCustomerComponent },
     ]),
     ReactiveFormsModule,
     BrowserAnimationsModule,

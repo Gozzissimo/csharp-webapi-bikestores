@@ -64,7 +64,8 @@ export class CustomersComponent implements OnInit {
     'street',
     'city',
     'state',
-    'zipCode'
+    'zipCode',
+    'actions'
   ];
 
   applyFilter(event: Event) {

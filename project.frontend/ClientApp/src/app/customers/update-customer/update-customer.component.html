@@ -1,1 +1,62 @@
-<p>update-customer works!</p>
+<h1 class="heading"><strong>HTTP </strong>Create New Customer</h1>
+
+<form [formGroup]="customerForm" (ngSubmit)="UpdateAsync()">
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Firts Name</mat-label>
+      <input matInput type="text" formControlName="firstName">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" formControlName="lastName">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Phone</mat-label>
+      <input required matInput type="tel" formControlName="phone">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Street</mat-label>
+      <input required matInput type="text" formControlName="street">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>City</mat-label>
+      <input required matInput type="text" formControlName="city">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>State</mat-label>
+      <input required matInput type="text" formControlName="state">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="legacy">
+      <mat-label>ZipCode</mat-label>
+      <input required matInput type="text" formControlName="zipCode">
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </div>
+</form>

@@ -1,1 +1,14 @@
-<p>show-customer works!</p>
+<div *ngIf="isLoading">
+  <h1>Loading data...</h1>
+</div>
+
+<div *ngIf="!isLoading">
+  <h1>{{ actualCustomer.customerName }}</h1>
+  <p>Telefono: {{ (actualCustomer.phone ? actualCustomer.phone : "ND") }}</p>
+  <p>Email: {{ actualCustomer.email }} </p>
+  <p>Indirizzo: {{ actualCustomer.street }}</p>
+  <p>Città: {{ actualCustomer.city }}</p>
+  <p>Nazione: {{ actualCustomer.state }}</p>
+  <p>CAP: {{ actualCustomer.zipCode }}</p>
+  <button mat-raised-button color="warn" class="button" type="button" (click)="DeleteAsync(customerId)">Delete</button>
+</div>
