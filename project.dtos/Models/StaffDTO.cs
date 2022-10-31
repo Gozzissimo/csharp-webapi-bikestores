@@ -10,5 +10,6 @@
         public byte Active { get; set; }
         public int StoreId { get; set; }
         public int? ManagerId { get; set; }
+        public string? StaffName { get; set; }
     }
 }

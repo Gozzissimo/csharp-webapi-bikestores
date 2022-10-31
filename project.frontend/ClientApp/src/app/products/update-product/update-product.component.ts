@@ -23,15 +23,6 @@ export class UpdateProductComponent implements OnInit {
   public brands!: Brand[];
   public categories!: Category[];
 
-  constructor(
-    private productService: ProductService,
-    private brandService: BrandService,
-    private categoryService: CategoryService,
-    private _Activatedroute: ActivatedRoute,
-    private router: Router,
-    public formBuilder: FormBuilder,
-  ) { }
-
   //BUILDER DEL FORM
   productForm: FormGroup = this.formBuilder.group({
     brandId: [null],
@@ -41,6 +32,16 @@ export class UpdateProductComponent implements OnInit {
     listPrice: [null],
     productId: [null]
   });
+
+  constructor(
+    private productService: ProductService,
+    private brandService: BrandService,
+    private categoryService: CategoryService,
+    private _Activatedroute: ActivatedRoute,
+    private router: Router,
+    public formBuilder: FormBuilder,
+  ) { }
+
 
 
   //RECALL DEI DATI PER BRAND

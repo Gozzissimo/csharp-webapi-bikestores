@@ -1,0 +1,13 @@
+<div *ngIf="isLoading">
+  <h1>Loading data...</h1>
+</div>
+
+<div *ngIf="!isLoading">
+  <h1>{{ actualStaff.staffName }}</h1>
+  <p>Telefono: {{ (actualStaff.phone ? actualStaff.phone : "ND") }}</p>
+  <p>Email: {{ actualStaff.email }} </p>
+  <p>Active: {{ (actualStaff.phone == "1" ? actualStaff.phone : "Attivo") }}</p>
+  <p>StoreID: {{ actualStaff.storeId }}</p>
+  <p>ManagerID: {{ actualStaff.managerId }}</p>
+  <button mat-raised-button color="warn" class="button" type="button" (click)="DeleteAsync(staffId)">Delete</button>
+</div>

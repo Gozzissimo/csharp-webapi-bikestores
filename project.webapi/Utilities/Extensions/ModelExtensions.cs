@@ -247,18 +247,19 @@ namespace project.webapi.Utilities.Extensions
         #endregion
 
         #region Staff
-        public static StaffDTO ToModelDTO(this Staff Staff)
+        public static StaffDTO ToModelDTO(this Staff staff)
         {
             return new StaffDTO
             {
-                StaffId = Staff.StaffId,
-                FirstName = Staff.FirstName,
-                LastName = Staff.LastName,
-                Email = Staff.Email,
-                Phone = Staff.Phone,
-                Active = Staff.Active,
-                StoreId = Staff.StoreId,
-                ManagerId = Staff.ManagerId
+                StaffId = staff.StaffId,
+                FirstName = staff.FirstName,
+                LastName = staff.LastName,
+                Email = staff.Email,
+                Phone = staff.Phone,
+                Active = staff.Active,
+                StoreId = staff.StoreId,
+                ManagerId = staff.ManagerId,
+                StaffName = $"{staff.FirstName} {staff.LastName}"
             };
         }
         public static List<StaffDTO> ToModelDTO(this List<Staff>? Staff)

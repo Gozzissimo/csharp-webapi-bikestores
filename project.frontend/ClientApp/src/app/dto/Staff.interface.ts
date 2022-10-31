@@ -6,5 +6,6 @@ export interface Staff {
   phone: string;
   active: number;
   storeId: number;
-  managerdId: number;
+  managerId: number;
+  staffName: string;
 }

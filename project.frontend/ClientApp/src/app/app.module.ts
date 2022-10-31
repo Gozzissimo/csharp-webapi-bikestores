@@ -59,6 +59,13 @@ import { UpdateStoreComponent } from './stores/update-store/update-store.compone
 import { ShowStoreComponent } from './stores/show-store/show-store.component';
 import { DeleteStoreComponent } from './stores/delete-store/delete-store.component';
 
+//STAFFS
+import { StaffsComponent } from './staffs/staffs.component';
+import { CreateStaffComponent } from './staffs/create-staff/create-staff.component';
+import { DeleteStaffComponent } from './staffs/delete-staff/delete-staff.component';
+import { UpdateStaffComponent } from './staffs/update-staff/update-staff.component';
+import { ShowStaffComponent } from './staffs/show-staff/show-staff.component';
+
 //MATERIAL UI
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -128,7 +135,12 @@ import { StockService } from './services/stock.service';
     CreateStoreComponent,
     UpdateStoreComponent,
     ShowStoreComponent,
-    DeleteStoreComponent
+    DeleteStoreComponent,
+    StaffsComponent,
+    CreateStaffComponent,
+    DeleteStaffComponent,
+    UpdateStaffComponent,
+    ShowStaffComponent
   ],
 
   imports: [
@@ -181,12 +193,19 @@ import { StockService } from './services/stock.service';
       { path: 'customers/edit/:customerId', component: UpdateCustomerComponent },
       { path: 'customers/delete/:customerId', component: DeleteCustomerComponent },
 
-      //CUSTOMERS
+      //STORES
       { path: 'stores', component: StoresComponent },
       { path: 'stores/new', component: CreateStoreComponent },
       { path: 'stores/show/:storeId', component: ShowStoreComponent },
       { path: 'stores/edit/:storeId', component: UpdateStoreComponent },
       { path: 'stores/delete/:storeId', component: DeleteStoreComponent },
+
+      //STAFFS
+      { path: 'staffs', component: StaffsComponent },
+      { path: 'staffs/new', component: CreateStaffComponent },
+      { path: 'staffs/show/:staffId', component: ShowStaffComponent },
+      { path: 'staffs/edit/:staffId', component: UpdateStaffComponent },
+      { path: 'staffs/delete/:staffId', component: DeleteStaffComponent },
     ]),
     ReactiveFormsModule,
     BrowserAnimationsModule,
