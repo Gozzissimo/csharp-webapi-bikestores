@@ -23,6 +23,10 @@ export class StockService implements IApiService<Stock> {
     return this.http.get<Stock>(`${this.conf.GetValue("urlApi")}/stock/${id}`);
   }
 
+  FindByDoubleIdAsync(storeId: number, productId: number): Observable<Stock> {
+    return this.http.get<Stock>(`${this.conf.GetValue("urlApi")}/stock/${storeId}/${productId}`);
+  }
+
   CreateAsync(element: Stock): Observable<Stock> {
     return this.http.post<Stock>(`${this.conf.GetValue("urlApi")}/stock`, element);
   }

@@ -66,6 +66,13 @@ import { DeleteStaffComponent } from './staffs/delete-staff/delete-staff.compone
 import { UpdateStaffComponent } from './staffs/update-staff/update-staff.component';
 import { ShowStaffComponent } from './staffs/show-staff/show-staff.component';
 
+//STOCKS
+import { StocksComponent } from './stocks/stocks.component';
+import { CreateStockComponent } from './stocks/create-stock/create-stock.component';
+import { UpdateStockComponent } from './stocks/update-stock/update-stock.component';
+import { DeleteStockComponent } from './stocks/delete-stock/delete-stock.component';
+import { ShowStockComponent } from './stocks/show-stock/show-stock.component';
+
 //MATERIAL UI
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -140,7 +147,12 @@ import { StockService } from './services/stock.service';
     CreateStaffComponent,
     DeleteStaffComponent,
     UpdateStaffComponent,
-    ShowStaffComponent
+    ShowStaffComponent,
+    StocksComponent,
+    CreateStockComponent,
+    UpdateStockComponent,
+    DeleteStockComponent,
+    ShowStockComponent
   ],
 
   imports: [
@@ -206,6 +218,13 @@ import { StockService } from './services/stock.service';
       { path: 'staffs/show/:staffId', component: ShowStaffComponent },
       { path: 'staffs/edit/:staffId', component: UpdateStaffComponent },
       { path: 'staffs/delete/:staffId', component: DeleteStaffComponent },
+
+      //STOCKS
+      { path: 'stocks', component: StocksComponent },
+      { path: 'stocks/new', component: CreateStockComponent },
+      { path: 'stocks/show/:storeId/:productId', component: ShowStockComponent },
+      { path: 'stocks/edit/:storeId/:productId', component: UpdateStockComponent },
+      { path: 'stocks/delete/:storeId/:productId', component: DeleteStockComponent },
     ]),
     ReactiveFormsModule,
     BrowserAnimationsModule,

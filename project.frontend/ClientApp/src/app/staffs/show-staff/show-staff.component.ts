@@ -14,7 +14,6 @@ export class ShowStaffComponent implements OnInit {
   public staffId!: number;
   public actualStaff!: Staff;
   public isLoading: boolean = true;
-  public id: number = 0;
 
   constructor(
     private _Activatedroute: ActivatedRoute,

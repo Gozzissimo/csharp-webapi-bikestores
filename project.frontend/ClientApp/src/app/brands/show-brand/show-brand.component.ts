@@ -13,7 +13,6 @@ export class ShowBrandComponent implements OnInit {
   brandId!: number;
   actualBrand!: Brand;
   isLoading: boolean = true;
-  id: number = 0;
 
   constructor(
     private _Activatedroute: ActivatedRoute,

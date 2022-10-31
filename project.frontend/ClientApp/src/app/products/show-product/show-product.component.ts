@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { concat, map, of } from 'rxjs';
+import { concat, of } from 'rxjs';
 import { Product } from '../../dto/Product.interface';
 import { ProductService } from '../../services/product.service';
 
@@ -13,7 +13,6 @@ export class ShowProductComponent implements OnInit {
   productId!: number;
   actualProduct!: Product;
   isLoading: boolean = true;
-  id: number = 0;
 
   constructor(
     private _Activatedroute: ActivatedRoute,

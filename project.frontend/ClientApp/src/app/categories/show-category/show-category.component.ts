@@ -14,7 +14,6 @@ export class ShowCategoryComponent implements OnInit {
   categoryId!: number;
   actualCategory!: Category;
   isLoading: boolean = true;
-  id: number = 0;
 
   constructor(
     private _Activatedroute: ActivatedRoute,

@@ -300,13 +300,14 @@ namespace project.webapi.Utilities.Extensions
         #endregion
 
         #region Stock
-        public static StockDTO ToModelDTO(this Stock Stock)
+        public static StockDTO ToModelDTO(this Stock stock)
         {
             return new StockDTO
             {
-                StoreId = Stock.StoreId,
-                ProductId = Stock.ProductId,
-                Quantity = Stock.Quantity
+                StoreId = stock.StoreId,
+                ProductId = stock.ProductId,
+                Quantity = stock.Quantity,
+                ProductName = stock.Product.ProductName
             };
         }
         public static List<StockDTO> ToModelDTO(this List<Stock>? Stock)

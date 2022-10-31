@@ -1,94 +1,100 @@
-<h1 class="heading"><strong>HTTP </strong>Update Order <strong>#{{actualOrder.orderId}}</strong></h1>
+<div *ngIf="isLoading">
+  <h1>Loading data...</h1>
+</div>
 
-<form [formGroup]="orderForm" (ngSubmit)="UpdateAsync()">
+<div *ngIf="!isLoading">
+  <h1 class="heading"><strong>HTTP </strong>Update Order <strong>#{{actualOrder.orderId}}</strong></h1>
 
-  <div>
-    <mat-form-field appearance="legacy">
-      <mat-label>Customer Name</mat-label>
-      <input type="text"
-             placeholder="Choose your Customer"
-             matInput
-             formControlName="customerId"
-             required
-             [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let order of filteredOrders" [value]="order.customerId">
-          {{order.customerName}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </div>
+  <form [formGroup]="orderForm" (ngSubmit)="UpdateAsync()">
 
-  <div>
-    <mat-form-field appearance="legacy">
-      <mat-label>Order Status</mat-label>
-      <input required matInput type="number"
-             formControlName="orderStatus"
-             placeholder="Possible Status: 1,2,3,4">
-    </mat-form-field>
-  </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Customer Name</mat-label>
+        <input type="text"
+               placeholder="Choose your Customer"
+               matInput
+               formControlName="customerId"
+               required
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let order of filteredOrders" [value]="order.customerId">
+            {{order.customerName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
 
-  <div>
-    <mat-form-field appearance="legacy">
-      <mat-label>Order Date</mat-label>
-      <input matInput
-             [matDatepicker]="orderDatePicker"
-             [matDatepickerFilter]="DateFilter"
-             (click)="orderDatePicker.open()"
-             formControlName="orderDate"
-             required>
-      <mat-hint>dd/mm/yyyy</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="orderDatePicker"></mat-datepicker-toggle>
-      <mat-datepicker #orderDatePicker></mat-datepicker>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="legacy">
-      <mat-label>Required Date</mat-label>
-      <input matInput
-             [matDatepicker]="requiredDatePicker"
-             [matDatepickerFilter]="DateFilter"
-             (click)="requiredDatePicker.open()"
-             formControlName="requiredDate"
-             required>
-      <mat-hint>dd/mm/yyyy</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="requiredDatePicker"></mat-datepicker-toggle>
-      <mat-datepicker #requiredDatePicker></mat-datepicker>
-    </mat-form-field>
-  </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Order Status</mat-label>
+        <input required matInput type="number"
+               formControlName="orderStatus"
+               placeholder="Possible Status: 1,2,3,4">
+      </mat-form-field>
+    </div>
 
-  <div>
-    <mat-form-field appearance="legacy">
-      <mat-label>Shipped Date</mat-label>
-      <input matInput [matDatepicker]="shippedDatePicker"
-             [matDatepickerFilter]="DateFilter"
-             (click)="shippedDatePicker.open()"
-             formControlName="shippedDate">
-      <mat-hint>dd/mm/yyyy</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="shippedDatePicker"></mat-datepicker-toggle>
-      <mat-datepicker #shippedDatePicker></mat-datepicker>
-    </mat-form-field>
-  </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Order Date</mat-label>
+        <input matInput
+               [matDatepicker]="orderDatePicker"
+               [matDatepickerFilter]="DateFilter"
+               (click)="orderDatePicker.open()"
+               formControlName="orderDate"
+               required>
+        <mat-hint>dd/mm/yyyy</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="orderDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #orderDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Required Date</mat-label>
+        <input matInput
+               [matDatepicker]="requiredDatePicker"
+               [matDatepickerFilter]="DateFilter"
+               (click)="requiredDatePicker.open()"
+               formControlName="requiredDate"
+               required>
+        <mat-hint>dd/mm/yyyy</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="requiredDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #requiredDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
 
-  <div>
-    <mat-form-field appearance="legacy">
-      <mat-label>Store Id</mat-label>
-      <mat-select required formControlName="storeId" name="store">
-        <mat-option *ngFor="let store of stores" [value]="store.storeId">{{ store.storeId }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Shipped Date</mat-label>
+        <input matInput [matDatepicker]="shippedDatePicker"
+               [matDatepickerFilter]="DateFilter"
+               (click)="shippedDatePicker.open()"
+               formControlName="shippedDate">
+        <mat-hint>dd/mm/yyyy</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="shippedDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #shippedDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
 
-  <div>
-    <mat-form-field appearance="legacy">
-      <mat-label>Staff Id</mat-label>
-      <mat-select required formControlName="staffId" name="staff">
-        <mat-option *ngFor="let staff of staffs" [value]="staff.staffId">{{ staff.staffId }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Store Id</mat-label>
+        <mat-select required formControlName="storeId" name="store">
+          <mat-option *ngFor="let store of stores" [value]="store.storeId">{{ store.storeId }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-  <div mat-dialog-actions>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
-  </div>
-</form>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Staff Id</mat-label>
+        <mat-select required formControlName="staffId" name="staff">
+          <mat-option *ngFor="let staff of staffs" [value]="staff.staffId">{{ staff.staffId }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+  </form>
+</div>

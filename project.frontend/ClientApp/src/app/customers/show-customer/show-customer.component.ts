@@ -14,7 +14,6 @@ export class ShowCustomerComponent implements OnInit {
   customerId!: number;
   actualCustomer!: Customer;
   isLoading: boolean = true;
-  id: number = 0;
 
   constructor(
     private _Activatedroute: ActivatedRoute,

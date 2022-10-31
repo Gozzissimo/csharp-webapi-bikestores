@@ -41,7 +41,9 @@ namespace project.workers
         #region Async
         public async Task<List<Stock>> GetAsync()
         {
-            return await _context.Stocks.ToListAsync();
+            return await _context.Stocks
+                .Include(e => e.Product)
+                .ToListAsync();
         }
 
         public async Task<Stock> CreateAsync(Stock Stock)
@@ -70,11 +72,19 @@ namespace project.workers
         public async Task<Stock> FindByIdAsync(Stock stock)
         {
             return await _context.Stocks.FindAsync(stock.StoreId, stock.ProductId);
+
         }
 
         public async Task<Stock> FindByIdAsync(int storeId, int productId)
         {
-            return await _context.Stocks.FindAsync(storeId, productId);
+            //return await _context.Stocks.FindAsync(storeId, productId);
+
+            var stock = await _context.Stocks
+                .Include(e => e.Product)
+                .FirstOrDefaultAsync(e => e.StoreId == storeId && e.ProductId == productId);
+            return stock;
+
+
         }
         #endregion
 

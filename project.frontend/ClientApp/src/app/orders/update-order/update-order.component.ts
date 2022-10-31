@@ -18,6 +18,7 @@ export class UpdateOrderComponent implements OnInit {
 
   public orderId!: number;
   public loading: boolean = false;
+  public isLoading: boolean = false;
   public errorMessage!: string;
   public staffs!: Staff[];
   public stores!: Store[];
@@ -160,7 +161,8 @@ export class UpdateOrderComponent implements OnInit {
               storeId,
               staffId
             });
-            this.actualOrder = res
+            this.actualOrder = res;
+            this.isLoading = false;
           }
         ))
     )
