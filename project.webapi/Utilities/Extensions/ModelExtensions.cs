@@ -485,5 +485,43 @@ namespace project.webapi.Utilities.Extensions
             return List;
         }
         #endregion
+
+        #region User
+        public static UserDTO ToModelDTO(this User User)
+        {
+            return new UserDTO
+            {
+                //PROPERTIES
+            };
+        }
+        public static List<UserDTO> ToModelDTO(this List<User>? User)
+        {
+            List<UserDTO> List = new List<UserDTO>();
+
+            foreach (User user in User)
+            {
+                List.Add(user.ToModelDTO());
+            }
+            return List;
+        }
+
+        public static User ToModelDB(this UserDTO User)
+        {
+            return new User
+            {
+                //PROPERTIES
+            };
+        }
+        public static List<User> ToModelDB(this List<UserDTO>? User)
+        {
+            List<User> List = new List<User>();
+
+            foreach (UserDTO user in User)
+            {
+                List.Add(user.ToModelDB());
+            }
+            return List;
+        }
+        #endregion
     }
 }
