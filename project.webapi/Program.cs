@@ -1,6 +1,11 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using project.data;
 using project.workers;
+using Swashbuckle.AspNetCore.Filters;
+using System.Text;
 
 namespace project.webapi
 {
@@ -12,6 +17,7 @@ namespace project.webapi
 
             // Add services to the container.
 
+            //CORS PER PERMETTERE DI LAVORARE SU PROGETTI DIVERSI
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -28,13 +34,41 @@ namespace project.webapi
             builder.Services.AddControllers();
 
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
 
-            //Stringa di connessione al server
+            //SWAGGER -> AGGIUNTA POSSIBILITA' DI INSERIRE UN SISTEMA DI AUTHORIZATION
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
+            });
+
+            //AUTHENTICATION
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                        .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+
+            //STRINGA DI CONNESSIONE AL SERVER
             //string sConnectionString = builder.Configuration.GetConnectionString("DBConnection");
             builder.Services.AddDbContext<BikeStoresContext>(options =>
                 options.UseSqlServer("Data Source=PC-212;Initial Catalog=BikeStores;Integrated Security=True"));
 
+            //AGGIUNTA WORKERS
             builder.Services.AddScoped<IWorker<Brand>, BrandWorker>();
             builder.Services.AddScoped<IWorker<Customer>, CustomerWorker>();
             builder.Services.AddScoped<IWorker<Category>, CategoryWorker>();
@@ -60,7 +94,11 @@ namespace project.webapi
 
             app.UseHttpsRedirection();
 
-            app.UseCors(); // MODIFICA PER IL CORS
+            //ATTIVAZIONE CORS
+            app.UseCors();
+
+            //ATTIVAZIONE AUTHENTICATION
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

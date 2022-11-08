@@ -45,7 +45,7 @@ namespace project.webapi.Controllers
 
         //CREATE
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult<SettingDTO>> Create(SettingDTO Setting)
         {
             if (!ModelState.IsValid)

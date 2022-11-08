@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using project.data;
 using project.dtos;
 using project.webapi.Utilities.Extensions;
@@ -17,7 +18,7 @@ namespace project.webapi.Controllers
         }
 
         //GET: api/Brands
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public async Task<ActionResult<BrandDTO>> Get()
         {
             var data = await _worker.GetAsync();
@@ -45,7 +46,7 @@ namespace project.webapi.Controllers
 
         //CREATE
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult<BrandDTO>> Create(BrandDTO Brand)
         {
             if (!ModelState.IsValid)
