@@ -13,6 +13,8 @@ namespace project.webapi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+
+        public static User user = new User();
         private readonly IWorker<User> _worker;
         private readonly IConfiguration _configuration;
 
@@ -23,8 +25,6 @@ namespace project.webapi.Controllers
             this._worker = worker;
             _configuration = configuration;
         }
-
-        public static User user = new User();
 
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserDTO request)
@@ -37,7 +37,6 @@ namespace project.webapi.Controllers
 
                 return Ok(user);
             }
-
         }
 
         [HttpPost("login")]
@@ -52,8 +51,61 @@ namespace project.webapi.Controllers
             {
                 return BadRequest("Wrong Password");
             }
+
             string token = CreateToken(user);
+
+            var refreshToken = GenerateRefreshToken();
+            SetRefreshToken(refreshToken);
+
             return Ok(token);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult<string>> RefreshToken()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+
+            if (user.RefreshToken != refreshToken)
+            {
+                return Unauthorized("Invalid Refresh Token.");
+            }
+            else if (user.TokenExpires < DateTime.Now)
+            {
+                return Unauthorized("Token expired.");
+            }
+
+            string token = CreateToken(user);
+            var newRefreshToken = GenerateRefreshToken();
+            SetRefreshToken(newRefreshToken);
+
+            return Ok(token);
+        }
+
+        private RefreshToken GenerateRefreshToken()
+        {
+            var refreshToken = new RefreshToken
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Expires = DateTime.Now.AddDays(7),
+                Created = DateTime.Now,
+            };
+
+            return refreshToken;
+        }
+
+        private void SetRefreshToken(RefreshToken newRefreshToken)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = newRefreshToken.Expires
+            };
+
+            Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
+
+            user.RefreshToken = newRefreshToken.Token;
+            user.TokenCreated = newRefreshToken.Created;
+            user.TokenExpires = newRefreshToken.Expires;
         }
 
         private string CreateToken(User user)
